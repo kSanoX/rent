@@ -14,7 +14,10 @@ function App() {
         <div className='App'>
           <Routes>
             <Route path='/' element={<HomePage />} />
+            <Route path='/login' element={<AuthPage />} />
+            <Route path='/register' element={<RegisterPage />} />
             <Route path='/properties' element={<PropertiesPage></PropertiesPage>}></Route>
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/property-details/:_id" element={<PropertyDetailsPage />} />
             <Route path="/about" element={<AboutUsPage />} />
           </Routes>

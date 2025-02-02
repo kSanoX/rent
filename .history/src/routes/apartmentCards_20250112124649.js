@@ -2,6 +2,7 @@ const express = require('express');
 const ApartmentCard = require('../models/ApartmentCard');
 const router = express.Router();
 
+// Получение всех карточек
 router.get('/cards', async (req, res) => {
     try {
         const apartmentCards = await ApartmentCard.find();

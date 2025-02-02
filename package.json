@@ -9,6 +9,7 @@
     "buffer": "^6.0.3",
     "cors": "^2.8.5",
     "cra-template": "1.2.0",
+    "firebase": "^11.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "nodemailer": "^6.10.0",
