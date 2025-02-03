@@ -1,3 +1,4 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react'
 
 export const SignUp = () => {
@@ -13,7 +14,7 @@ export const SignUp = () => {
             setError("Passwords didn`t match");
             return
         }
-        creatUser
+        createUserWithEmailAndPassword
 
     }
 
