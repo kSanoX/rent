@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -20,9 +20,9 @@ const LoginPage = () => {
 
         if (response.ok) {
             localStorage.setItem('token', data.token);
-            await login(data.token);
-            navigate('/');
-          } else {
+            login(data.user); // Обновляем данные пользователя в контексте
+            navigate('/'); 
+        } else {
             setError(data.error);
         }
     };

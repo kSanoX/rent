@@ -20,9 +20,9 @@ const LoginPage = () => {
 
         if (response.ok) {
             localStorage.setItem('token', data.token);
-            await login(data.token);
-            navigate('/');
-          } else {
+            login(data.user); // Обновляем данные пользователя в контексте
+            navigate('/'); 
+        } else {
             setError(data.error);
         }
     };

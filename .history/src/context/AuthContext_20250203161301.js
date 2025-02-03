@@ -29,21 +29,10 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    const login = async (token) => {
-        try {
-          const response = await fetch('/api/user', {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          const data = await response.json();
-          
-          if (response.ok) {
-            setUser(data.user);
-            localStorage.setItem('token', token);
-          }
-        } catch (error) {
-          console.error('Login error:', error);
-        }
-      };
+    const login = (userData) => {
+        setUser(userData); // сохраняем данные пользователя в контексте
+        localStorage.setItem('token', userData.token); // сохраняем токен
+    };
 
     const logout = () => {
         setUser(null);

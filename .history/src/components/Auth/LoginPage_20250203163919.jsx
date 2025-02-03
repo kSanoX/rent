@@ -20,7 +20,7 @@ const LoginPage = () => {
 
         if (response.ok) {
             localStorage.setItem('token', data.token);
-            await login(data.token);
+            await login(data.token); // Передаём токен, а не данные пользователя
             navigate('/');
           } else {
             setError(data.error);
