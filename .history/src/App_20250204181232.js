@@ -8,7 +8,6 @@ import PropertyDetailsPage from './components/PropertiesDetailsPage/PropertyDeta
 import AboutUsPage from './components/AboutUsPage/AboutUsPage';
 import LoginPage from './components/Auth/LoginPage';
 import RegisterPage from './components/Auth/RegisterPage';
-import ProfilePage from "./components/ProfilePage/ProfilePage"
 
 function App() {
   return (

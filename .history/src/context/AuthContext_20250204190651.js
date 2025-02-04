@@ -8,9 +8,8 @@ export const AuthProvider = ({ children }) => {
     // Функция для загрузки данных пользователя
     const fetchUser = async () => {
         const token = localStorage.getItem('token');
-        console.log('Token from localStorage:', token); // Проверка токена
         if (!token) return;
-    
+
         try {
             const response = await fetch('http://localhost:5000/api/user', {
                 headers: {
@@ -18,17 +17,15 @@ export const AuthProvider = ({ children }) => {
                     'Content-Type': 'application/json',
                 },
             });
-    
+
             if (!response.ok) throw new Error('Error fetching user data');
-    
+
             const data = await response.json();
-            console.log('User data fetched:', data); // Проверка данных
-            setUser(data.user);
+            setUser(data.user); // Устанавливаем данные пользователя
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
     };
-    
 
     // Запрос данных пользователя при монтировании
     useEffect(() => {

@@ -19,10 +19,9 @@ function Header() {
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/properties">Properties</Link></li>
                     {user ? (
-                        <li className="nav__user">
-                            <Link to="/profile" className="nav__user-link">
-                                {user.username}
-                            </Link>
+                        <li className="nav__user" >
+                            <Link to="/profile"></Link>
+                            <span>{user.username}</span> {/* Отображаем username пользователя */}
                             <button onClick={logout} className="nav__logout-btn">
                                 Logout
                             </button>
@@ -30,7 +29,6 @@ function Header() {
                     ) : (
                         <li><Link to="/login">Login</Link></li>
                     )}
-
                 </ul>
             </div>
             <div className="header__contact">

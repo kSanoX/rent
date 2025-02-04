@@ -25,31 +25,33 @@ mongoose
 // Маршрут для проверки сервера
 app.get('/', (req, res) => res.send('Server is running'));
 
+// Получение карточек квартир
+app.get("/api/cards/:_id", async (req, res) => {
+    const { _id } = req.params;
+    try {
+      const card = await CardModel.findById(_id);
+      if (!card) {
+        return res.status(404).json({ error: "Card not found" });
+      }
+      res.json(card);
+    } catch (err) {
+      res.status(500).json({ error: "Server error" });
+    }
+});
+
 
 app.get('/api/user', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) return res.status(401).json({ error: 'No token provided' });
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id).select('-password');
+    const user = await User.findById(decoded.userId).select('-password');
     
     if (!user) return res.status(404).json({ error: 'User not found' });
     res.json({ user });
   } catch (err) {
     res.status(401).json({ error: 'Invalid token' });
-  }
-});
-
-app.get("/api/cards/:_id", async (req, res) => {
-  const { _id } = req.params;
-  try {
-    const card = await CardModel.findById(_id);
-    if (!card) {
-      return res.status(404).json({ error: "Card not found" });
-    }
-    res.json(card);
-  } catch (err) {
-    res.status(500).json({ error: "Server error" });
   }
 });
 

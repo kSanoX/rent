@@ -4,7 +4,7 @@ import Logo from './Logo.svg';
 import { useAuth } from '../../../context/AuthContext';
 
 function Header() {
-    const { user, logout } = useAuth();
+    const { user, logout } = useAuth();  // Получаем данные пользователя из контекста
 
     return (
         <header className="header">
@@ -15,26 +15,23 @@ function Header() {
             </div>
             <div className="header__nav">
                 <ul className="nav__menu">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About Us</Link></li>
-                    <li><Link to="/properties">Properties</Link></li>
+                    <li><Link to="/">Главная</Link></li>
+                    <li><Link to="/about">О нас</Link></li>
+                    <li><Link to="/properties">Недвижимость</Link></li>
                     {user ? (
                         <li className="nav__user">
-                            <Link to="/profile" className="nav__user-link">
-                                {user.username}
-                            </Link>
+                            <span>{user.username}</span> {/* Отображаем имя пользователя */}
                             <button onClick={logout} className="nav__logout-btn">
-                                Logout
+                                Выйти
                             </button>
                         </li>
                     ) : (
-                        <li><Link to="/login">Login</Link></li>
+                        <li><Link to="/login">Войти</Link></li>
                     )}
-
                 </ul>
             </div>
             <div className="header__contact">
-                <button className="contact__us-btn">Contact Us</button>
+                <button className="contact__us-btn">Связаться с нами</button>
             </div>
         </header>
     );

@@ -14,7 +14,7 @@ const apartmentCardSchema = new mongoose.Schema({
         required: true
     },
     image: {
-        type: String,
+        type: String,  // Здесь будет храниться ссылка на изображение
         required: true
     },
     bedroomCount: {

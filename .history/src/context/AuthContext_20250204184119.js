@@ -8,50 +8,40 @@ export const AuthProvider = ({ children }) => {
     // Функция для загрузки данных пользователя
     const fetchUser = async () => {
         const token = localStorage.getItem('token');
-        console.log('Token from localStorage:', token); // Проверка токена
         if (!token) return;
-    
+
         try {
             const response = await fetch('http://localhost:5000/api/user', {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json', // Перенес в headers
                 },
             });
-    
+
             if (!response.ok) throw new Error('Error fetching user data');
-    
+
             const data = await response.json();
-            console.log('User data fetched:', data); // Проверка данных
             setUser(data.user);
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
     };
-    
 
     // Запрос данных пользователя при монтировании
     useEffect(() => {
-        fetchUser(); // Загружаем пользователя, если есть токен
+        fetchUser();
     }, []);
 
     // Функция логина
     const login = async (token) => {
-        try {
-            // Сохраняем токен в localStorage
-            localStorage.setItem('token', token);
-
-            // Загружаем данные пользователя
-            await fetchUser();
-        } catch (error) {
-            console.error('Login error:', error);
-        }
+        localStorage.setItem('token', token);
+        await fetchUser(); // Загружаем данные пользователя после логина
     };
 
     // Функция выхода
     const logout = () => {
         localStorage.removeItem('token');
-        setUser(null); // Убираем пользователя при выходе
+        setUser(null);
     };
 
     return (

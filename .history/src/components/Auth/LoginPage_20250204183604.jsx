@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -24,9 +23,9 @@ const LoginPage = () => {
 
         if (response.ok) {
             const data = await response.json();
+            login(data.user);
             console.log('Login successful:', data);
             localStorage.setItem('token', data.token);
-            login(data.token);
             navigate('/');
         } else {
             const errorData = await response.json();

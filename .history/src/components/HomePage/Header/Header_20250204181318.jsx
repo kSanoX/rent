@@ -21,7 +21,7 @@ function Header() {
                     {user ? (
                         <li className="nav__user">
                             <Link to="/profile" className="nav__user-link">
-                                {user.username}
+                                {user.username} {/* Теперь имя пользователя — это ссылка */}
                             </Link>
                             <button onClick={logout} className="nav__logout-btn">
                                 Logout

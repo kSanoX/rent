@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -26,7 +24,6 @@ const LoginPage = () => {
             const data = await response.json();
             console.log('Login successful:', data);
             localStorage.setItem('token', data.token);
-            login(data.token);
             navigate('/');
         } else {
             const errorData = await response.json();

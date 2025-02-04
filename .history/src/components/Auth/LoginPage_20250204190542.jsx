@@ -26,7 +26,7 @@ const LoginPage = () => {
             const data = await response.json();
             console.log('Login successful:', data);
             localStorage.setItem('token', data.token);
-            login(data.token);
+            login(data.user);
             navigate('/');
         } else {
             const errorData = await response.json();

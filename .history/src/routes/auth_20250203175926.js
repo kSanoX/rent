@@ -2,21 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
-
-
-router.get('/user', authMiddleware, async (req, res) => {
-  try {
-      const user = await User.findById(req.user.id).select('-password'); // убираем пароль из ответа
-      if (!user) return res.status(404).json({ error: 'User not found' });
-
-      res.json(user);
-  } catch (error) {
-      res.status(500).json({ error: 'Server error' });
-  }
-});
 
 // Регистрация пользователя
 router.post('/register', async (req, res) => {
@@ -38,10 +25,9 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body; // Accept email or username
+    const { username, password } = req.body;
     try {
-      // Check for user by email or username
-      const user = await User.findOne({ email: email });
+      const user = await User.findOne({ username });
       if (!user) {
         return res.status(400).json({ error: 'User not found' });
       }
@@ -51,6 +37,7 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ error: 'Invalid password' });
       }
   
+      // Generate JWT token
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
   
       res.json({
