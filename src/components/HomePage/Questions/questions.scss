@@ -1,0 +1,33 @@
+@import "../../../vars";
+
+.card-items__questions {
+    display: flex;
+    gap: 30px;
+    padding-top: 40px;
+
+    .question-item {
+            border-radius: 12px;
+            border: 1px solid $grayShades15;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 50px 20px 50px;
+            gap: 30px;
+
+            p {
+                @include defaultParagraph;
+            }
+
+            h3 {
+                font-weight: $font-weight-semi-bold;
+            }
+
+            button {
+                @include blackButtonWithBorders;
+                width: max-content;
+                padding: 16px;
+                background-color: $grayShades10;
+            }
+
+        }
+}
+

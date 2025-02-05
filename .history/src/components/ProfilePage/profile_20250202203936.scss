@@ -1,0 +1,12 @@
+@import "../../vars";
+
+.profile__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 160px;
+    border-radius: 32px;
+    border: 2px solid $grayShades20;
+    height: 100vh;
+}

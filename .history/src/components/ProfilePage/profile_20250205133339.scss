@@ -1,0 +1,16 @@
+@import "../../vars";
+
+.profile__container {
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    margin: 0px 120px;
+    border-radius: 32px;
+    border: 2px solid $grayShades20;
+    height: 100vh;
+}
+
+.right-container {
+    width: 100%;
+    margin-left: 32 px;
+}

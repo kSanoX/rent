@@ -1,0 +1,28 @@
+@import "../../vars";
+
+.profile__container {
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    margin: 0px 120px;
+    border-radius: 32px;
+    border: 2px solid $grayShades20;
+    height: 100vh;
+    padding: 32px;
+}
+
+.profile__avatar {
+    img {
+        border-radius: 32px;
+    }
+}
+
+.right-container {
+    width: 100%;
+    margin-left: 32px;
+}
+
+.username__profile {
+    grid-column: span 1;
+    margin: 0px 150px;
+}
