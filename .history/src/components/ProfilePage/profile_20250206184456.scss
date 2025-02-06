@@ -1,0 +1,46 @@
+@import "../../vars";
+
+.profile__container {
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    margin: 0px 120px;
+    border-radius: 32px;
+    border: 2px solid $grayShades20;
+    height: 100vh;
+    padding: 32px;
+}
+
+.profile__avatar {
+    img {
+        border-radius: 32px;
+        width: 190px;
+        height: 190px;
+    }
+}
+
+input[type="file"] {
+    display: none;
+  }
+
+  .custom-file-upload {
+    @include purpleButton;
+    cur
+  }
+  
+  .custom-file-upload:hover {
+    
+  }
+  
+
+.right-container {
+    width: 100%;
+    margin-left: 32px;
+    height: 100%;
+}
+
+.username__profile {
+    grid-column: 1 / -1; /* Занимает всю строку */
+    justify-self: start; /* Остается в рамках одной колонки */
+    width: fit-content;  /* Ширина зависит от содержимого */
+}
