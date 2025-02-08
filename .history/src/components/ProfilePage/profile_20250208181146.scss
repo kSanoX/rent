@@ -7,7 +7,6 @@
     margin: 0px 120px;
     border-radius: 32px;
     border: 2px solid $grayShades20;
-    gap: 48px;
     height: auto;
     padding: 32px;
 }
@@ -38,6 +37,12 @@ input[type="file"] {
 
 .right-container {
    width: 100%;
+}
+
+.username__profile {
+    grid-column: 1 / -1; /* Занимает всю строку */
+    justify-self: start; /* Остается в рамках одной колонки */
+    width: fit-content;  /* Ширина зависит от содержимого */
 }
 
 .admin-panel {

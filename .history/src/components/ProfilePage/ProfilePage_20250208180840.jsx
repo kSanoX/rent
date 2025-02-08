@@ -193,11 +193,6 @@ const ProfilePage = () => {
                     <input type="text" name="username" value={user?.username || ""} readOnly />
                   </fieldset>
 
-                  <fieldset className="happen__fieldset role__profile">
-                    <label htmlFor="role">Role</label>
-                    <input type="text" name="role" value={user?.role || ""} readOnly />
-                  </fieldset>
-
                   <fieldset className="happen__fieldset">
                     <label htmlFor="first-name">First Name</label>
                     <input type="text" name="first_name" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Enter First Name" />

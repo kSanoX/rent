@@ -40,6 +40,12 @@ input[type="file"] {
    width: 100%;
 }
 
+.username__profile {
+    grid-column: 1 / -1; /* Занимает всю строку */
+    justify-self: start; /* Остается в рамках одной колонки */
+    width: fit-content;  /* Ширина зависит от содержимого */
+}
+
 .admin-panel {
     background-color: transparent;
     border: 2px solid $grayShades20;

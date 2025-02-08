@@ -110,6 +110,7 @@ const ProfilePage = () => {
     setSliderImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
+  // Удалить главное изображение
   const handleImageRemove = () => {
     setImage(null);
   };
@@ -169,12 +170,12 @@ const ProfilePage = () => {
   return (
     <>
       <Header />
-      <div><h1 style={{ textAlign: "center" }}>Your Profile</h1></div>
       <div className="profile__container">
         {loading ? (
           <div className='downloading__profile'>Downloading...</div>
         ) : (
           <>
+            <h1 style={{ textAlign: "center" }}>Your Profile</h1>
             <div className="profile__avatar">
               <img src={user?.avatar ? `http://localhost:5000${user.avatar}` : defaultAvatar} alt="Аватар" />
               <label className="custom-file-upload">
@@ -191,11 +192,6 @@ const ProfilePage = () => {
                   <fieldset className="happen__fieldset username__profile">
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" value={user?.username || ""} readOnly />
-                  </fieldset>
-
-                  <fieldset className="happen__fieldset role__profile">
-                    <label htmlFor="role">Role</label>
-                    <input type="text" name="role" value={user?.role || ""} readOnly />
                   </fieldset>
 
                   <fieldset className="happen__fieldset">
@@ -228,7 +224,7 @@ const ProfilePage = () => {
               )}
 
 
-              {/* Admin`s form */}
+              {/* Форма для админа */}
               {user?.role === "admin" && (
                 <div className="admin-panel">
                   <h2>Add apartment</h2>
@@ -304,7 +300,7 @@ const ProfilePage = () => {
                       onChange={(e) => setPropertySize(e.target.value)}
                       required
                     />
-                    {/* Main image */}
+                    {/* Загрузка главного изображения */}
                     <div className="file-container">
                       <label className="custom-file-upload">
                         Select cover image
@@ -316,7 +312,7 @@ const ProfilePage = () => {
                       </label>
                     </div>
 
-                    {/* Main image preview */}
+                    {/* Превью главного изображения */}
                     {image && (
                       <div className="preview-container">
                         <h4>Preview Cover Image:</h4>
@@ -338,12 +334,15 @@ const ProfilePage = () => {
                           className="form-file"
                           type="file"
                           multiple
-                          onChange={handleSliderImageUpload}
+                          onChange={handleSliderImageUpload} // Используем функцию handleSliderImageUpload
                         />
                       </label>
                     </div>
 
-                    {/* Preview slider images */}
+                    {/* Логирование sliderImages перед рендером */}
+                    {console.log(sliderImages)}
+
+                    {/* Отображение изображений слайдера */}
                     {sliderImages.length > 0 && (
                       <div className="slider-preview">
                         <h4>Preview images for slider:</h4>
@@ -371,8 +370,6 @@ const ProfilePage = () => {
                   </form>
                 </div>
               )}
-
-
 
             </div>
           </>

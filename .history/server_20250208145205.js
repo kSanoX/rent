@@ -10,7 +10,6 @@ const authRoutes = require('./src/routes/auth');
 const filtersRouter = require('./src/routes/filters');
 const clientMessagesRoutes = require("./src/routes/clientMessages");
 const apartmentCardsRoute = require('./src/routes/apartmentCards');
-const uploadApartmentCardsRoute = require('./src/routes/uploadApartmentCards');
 const CardModel = require('./src/models/ApartmentCard');
 const userRoutes = require("./src/routes/userRoutes");
 const uploadRoutes = require("./src/routes/upload.js");
@@ -56,7 +55,7 @@ app.get("/api/cards/:_id", async (req, res) => {
   }
 });
 
-
+app.use('/api', apartmentCardsRoute);
 app.use('/apartmentsImages', express.static(path.join(__dirname, 'public/apartmentsImages')));
 app.use('/api', filtersRouter);
 app.use("/api/messages", clientMessagesRoutes);
@@ -65,7 +64,6 @@ app.use('/api', userRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api", uploadRoutes);
 app.use('/uploads', express.static('uploads'));
-app.use("/api/apartments", uploadApartmentCardsRoute);
 app.use("/api", apartmentCardsRoute);
 
 const PORT = process.env.PORT || 5000;

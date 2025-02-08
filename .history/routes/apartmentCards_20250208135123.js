@@ -1,5 +1,5 @@
 const express = require('express');
-const ApartmentCard = require('../models/ApartmentCard');
+const ApartmentCard = require('../src/models/ApartmentCard');
 const router = express.Router();
 
 router.get('/cards', async (req, res) => {

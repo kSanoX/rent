@@ -195,7 +195,7 @@ const ProfilePage = () => {
 
                   <fieldset className="happen__fieldset role__profile">
                     <label htmlFor="role">Role</label>
-                    <input type="text" name="role" value={user?.role || ""} readOnly />
+                    <input type="text" name="username" value={user?.username || ""} readOnly />
                   </fieldset>
 
                   <fieldset className="happen__fieldset">

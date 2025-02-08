@@ -3,20 +3,19 @@
 .profile__container {
     align-items: center;
     display: flex;
-    align-items: flex-start;
     margin: 0px 120px;
     border-radius: 32px;
     border: 2px solid $grayShades20;
-    gap: 48px;
     height: auto;
     padding: 32px;
+    justify-content: center;
 }
 
 .profile__avatar {
     img {
         border-radius: 32px;
-        width: 240px;
-        height: 240px;
+        width: 300px;
+        height: auto;
     }
     display: flex;
     flex-direction: column;
@@ -37,7 +36,13 @@ input[type="file"] {
   
 
 .right-container {
-   width: 100%;
+   width: auto;
+}
+
+.username__profile {
+    grid-column: 1 / -1; /* Занимает всю строку */
+    justify-self: start; /* Остается в рамках одной колонки */
+    width: fit-content;  /* Ширина зависит от содержимого */
 }
 
 .admin-panel {

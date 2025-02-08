@@ -1,8 +1,8 @@
 const express = require('express');
-const ApartmentCard = require('../models/ApartmentCard');
+const ApartmentCard = require('../src/models/ApartmentCard');
 const router = express.Router();
 
-router.get('/cards', async (req, res) => {
+router.get('/api/cards', async (req, res) => {
     try {
         const apartmentCards = await ApartmentCard.find();
         res.json(apartmentCards);

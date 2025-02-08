@@ -109,7 +109,7 @@ function PropertyDetailsPage() {
               <span>{apartmentCard.Locations}</span>
             </div>
           </div>
-          <p>Price: {apartmentCard.price}$</p>
+          <p>Price: {apartmentCard.Pricing_Range}$</p>
         </div>
 
         <div className="card__info-container">
@@ -146,7 +146,7 @@ function PropertyDetailsPage() {
             <div className="params">
               <div><img src={bedrooms} alt="" /> Bedrooms <br /> <span>{apartmentCard.bedroomCount}</span></div>
               <div><img src={bathrooms} alt="" /> Bathrooms <br /> <span>{apartmentCard.bathroomCount}</span></div>
-              <div><img src={area} alt="" /> Area <br /> <span>{apartmentCard.propertySize} sqm </span></div>
+              <div><img src={area} alt="" /> Area <br /> <span>{apartmentCard.propertySize}</span></div>
             </div>
           </div>
           <div className="key__features box">

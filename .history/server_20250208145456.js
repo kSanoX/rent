@@ -10,7 +10,6 @@ const authRoutes = require('./src/routes/auth');
 const filtersRouter = require('./src/routes/filters');
 const clientMessagesRoutes = require("./src/routes/clientMessages");
 const apartmentCardsRoute = require('./src/routes/apartmentCards');
-const uploadApartmentCardsRoute = require('./src/routes/uploadApartmentCards');
 const CardModel = require('./src/models/ApartmentCard');
 const userRoutes = require("./src/routes/userRoutes");
 const uploadRoutes = require("./src/routes/upload.js");
@@ -65,8 +64,7 @@ app.use('/api', userRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api", uploadRoutes);
 app.use('/uploads', express.static('uploads'));
-app.use("/api/apartments", uploadApartmentCardsRoute);
-app.use("/api", apartmentCardsRoute);
+app.use("/api/apartments", apartmentCardsRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

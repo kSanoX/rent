@@ -169,8 +169,8 @@ const ProfilePage = () => {
   return (
     <>
       <Header />
-      <div><h1 style={{ textAlign: "center" }}>Your Profile</h1></div>
       <div className="profile__container">
+      <h1 style={{ textAlign: "center" }}>Your Profile</h1>
         {loading ? (
           <div className='downloading__profile'>Downloading...</div>
         ) : (
@@ -191,11 +191,6 @@ const ProfilePage = () => {
                   <fieldset className="happen__fieldset username__profile">
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" value={user?.username || ""} readOnly />
-                  </fieldset>
-
-                  <fieldset className="happen__fieldset role__profile">
-                    <label htmlFor="role">Role</label>
-                    <input type="text" name="role" value={user?.role || ""} readOnly />
                   </fieldset>
 
                   <fieldset className="happen__fieldset">
