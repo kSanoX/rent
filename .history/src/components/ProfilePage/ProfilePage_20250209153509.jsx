@@ -165,7 +165,6 @@ const ProfilePage = () => {
       }
 
       const data = await response.json();
-      setUser((prev) => ({ ...prev, firstName, lastName, phone, message }));
       console.log('Profile updated:', data);
     } catch (error) {
       console.error('Error updating profile:', error);

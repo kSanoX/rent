@@ -200,7 +200,7 @@ input[type="file"] {
     flex-direction: column;
     padding: 20px;
     border-radius: 8px;
-    width: auto;
+    width: 500px;
     position: relative;
   }
   
@@ -231,6 +231,5 @@ input[type="file"] {
     display: grid;
     grid-template-columns: 2fr auto;
     gap: 4px;
-    margin-top: 18px;
   }
   

@@ -37,15 +37,15 @@ const ProfilePage = () => {
       navigate('/login');
       return;
     }
+
     if (!user) return;
-  
+
     setLoading(false);
     setFirstName(user.firstName || "");
     setLastName(user.lastName || "");
     setPhone(user.phone || "");
     setMessage(user.message || "");
-  }, [user]);
-  
+  }, [user, navigate]);
 
 
   const handleAddApartment = async (e) => {
@@ -134,7 +134,7 @@ const ProfilePage = () => {
 
       const data = await response.json();
       if (data.success) {
-        setUser((prev) => ({ ...prev, avatar: `${data.avatar}?timestamp=${new Date().getTime()}` }));
+        setUser((prev) => ({ ...prev, avatar: data.avatar }));
       } else {
         console.error("Ошибка загрузки аватара:", data.error);
       }
@@ -143,8 +143,7 @@ const ProfilePage = () => {
     }
   };
 
-  const handleSave = async (e) => {
-    e.preventDefault();
+  const handleSave = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/user/update', {
         method: 'PUT',
@@ -165,7 +164,6 @@ const ProfilePage = () => {
       }
 
       const data = await response.json();
-      setUser((prev) => ({ ...prev, firstName, lastName, phone, message }));
       console.log('Profile updated:', data);
     } catch (error) {
       console.error('Error updating profile:', error);

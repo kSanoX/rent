@@ -68,11 +68,9 @@ input[type="file"] {
   
   .form-textarea {
     resize: vertical;
-    max-height: 40px;
+    max-height: 60px;
     background-color: $grayShades15;
     border: none;
-    border-radius: 8px;
-    color: white;
   }
   
   .admin-panel .form-file {
@@ -117,8 +115,8 @@ input[type="file"] {
   }
   
   .preview-image {
-    max-width: 60px;
-    max-height: 200px;
+    max-width: 80px;
+    max-height: 150px;
     object-fit: cover;
     margin-top: 10px;
   }
@@ -200,7 +198,7 @@ input[type="file"] {
     flex-direction: column;
     padding: 20px;
     border-radius: 8px;
-    width: auto;
+    width: 500px;
     position: relative;
   }
   
@@ -231,6 +229,5 @@ input[type="file"] {
     display: grid;
     grid-template-columns: 2fr auto;
     gap: 4px;
-    margin-top: 18px;
   }
   

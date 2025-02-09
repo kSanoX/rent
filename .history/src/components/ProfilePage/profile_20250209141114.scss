@@ -15,7 +15,7 @@
 .profile__info {
   display: flex;
   gap: 32px;
-  width: 100%;
+  width: auto;
 }
 
 .profile__avatar {
@@ -38,16 +38,7 @@ input[type="file"] {
     @include purpleButton;
     background-color: $purpleShades90;
     font-weight: $font-weight-bold;
-    color: rgb(75, 75, 75);
-    padding: 4px;
-  }
-
-  .button-box__for-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
-    margin-top: 12px;
+    color: white;
   }
   
 
@@ -64,15 +55,31 @@ input[type="file"] {
     max-width: 600px;
     margin: 20px auto;
   }
-
   
-  .form-textarea {
+  .admin-panel h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .admin-panel form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .admin-panel .form-input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .admin-panel .form-textarea {
     resize: vertical;
-    max-height: 40px;
-    background-color: $grayShades15;
-    border: none;
-    border-radius: 8px;
-    color: white;
+    min-height: 100px;
   }
   
   .admin-panel .form-file {
@@ -83,12 +90,20 @@ input[type="file"] {
     font-size: 1rem;
     color: #555;
   }
-
-  .submit-button {
-    @include purpleButton;
-    padding: 8px;
-    font-size: 14px;
-    margin-top: 12px;
+  
+  .admin-panel .submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-panel .submit-button:hover {
+    background-color: #0056b3;
   }
   
   .admin-panel .file-container {
@@ -112,12 +127,12 @@ input[type="file"] {
     text-align: center;
     display: flex;
     flex-direction: column;
-    width: auto;
+    width: 30%;
     margin: 0 auto;
   }
   
   .preview-image {
-    max-width: 60px;
+    max-width: 100%;
     max-height: 200px;
     object-fit: cover;
     margin-top: 10px;
@@ -150,7 +165,7 @@ input[type="file"] {
   }
 
   .remove-image-button {
-    background-color: rgb(140, 0, 0);
+    background-color: red;
     color: rgb(0, 0, 0);
     border: none;
     padding: 5px;
@@ -159,8 +174,8 @@ input[type="file"] {
     margin-top: 5px;
     transition: 0.5s ease-in-out;
     font-weight: $font-weight-bold;
-    border: 2px solid rgb(105, 105, 105);
-    border-radius: 8px;
+    border: 1px solid white;
+    border-radius: 16px;
 
     &*{
         transition: 0.5s ease-in-out;
@@ -174,63 +189,5 @@ input[type="file"] {
   .slider-image-item{
     display: flex;
     flex-direction: column;
-  }
-  
-  .toggle-form-button {
-    @include blackButtonWithBorders;
-    background-color: $grayShades40;
-  }
-
-  .modal {
-    position: fixed;
-    z-index: 1001;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background: $grayShades20;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 8px;
-    width: auto;
-    position: relative;
-  }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
-    cursor: pointer;
-    &:hover {
-      color: red;
-    }
-  }
-
-  .form-input {
-    padding: 8px;
-    background-color: #262626;
-    border: 1px solid #333333;
-    border-radius: 12px;
-    color: white;
-  }
-
-  .sqm {
-    grid-column: span 2;
-  }
-
-  .apartment-form {
-    display: grid;
-    grid-template-columns: 2fr auto;
-    gap: 4px;
-    margin-top: 18px;
   }
   

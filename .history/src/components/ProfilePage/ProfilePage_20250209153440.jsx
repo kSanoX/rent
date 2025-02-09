@@ -134,7 +134,7 @@ const ProfilePage = () => {
 
       const data = await response.json();
       if (data.success) {
-        setUser((prev) => ({ ...prev, avatar: `${data.avatar}?timestamp=${new Date().getTime()}` }));
+        setUser((prev) => ({ ...prev, avatar: data.avatar }));
       } else {
         console.error("Ошибка загрузки аватара:", data.error);
       }
@@ -165,7 +165,6 @@ const ProfilePage = () => {
       }
 
       const data = await response.json();
-      setUser((prev) => ({ ...prev, firstName, lastName, phone, message }));
       console.log('Profile updated:', data);
     } catch (error) {
       console.error('Error updating profile:', error);
