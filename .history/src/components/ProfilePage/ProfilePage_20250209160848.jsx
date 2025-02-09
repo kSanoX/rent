@@ -81,7 +81,7 @@ const ProfilePage = () => {
 
       const data = await response.json();
       if (data.success) {
-        alert("Apartment posted!");
+        alert("Apartment added!");
       } else {
         alert("Ошибка: " + data.error);
       }
@@ -183,6 +183,9 @@ const ProfilePage = () => {
             </div>
 
             <div className="profile__info">
+
+              {user.role !== "admin" ? (<div></div>) : (
+
                 <div className="right-container">
                   <fieldset className="happen__fieldset username__profile">
                     <label htmlFor="username">Username</label>
@@ -220,10 +223,11 @@ const ProfilePage = () => {
                   </fieldset>
 
                   <button onClick={handleSave} className='save__changes btn'>Save Changes</button>
-                  {(user.role === "admin" || user.role === "seller") ? (<button className="toggle-form-button" onClick={openModal}>
+                  <button className="toggle-form-button" onClick={openModal}>
                     Add Apartment
-                  </button>) : (<div></div>)}
+                  </button>
                 </div>
+              )}
 
               {/* Apartments Form */}
               {(isModalOpen && (user.role === "admin" || user.role === "seller")) && (

@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
-const express = require('express');
+
 
 const authMiddleware = (req, res, next) => {
+
     const token = req.header('Authorization');
 
     if (!token) {
@@ -15,6 +16,7 @@ const authMiddleware = (req, res, next) => {
         }
 
         const decoded = jwt.verify(tokenValue, process.env.JWT_SECRET);
+
         console.log("Decoded token:", decoded);
 
         if (!decoded.role) {
@@ -28,14 +30,18 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
+const { verifyRole } = require(".//authMiddleware"); 
+app.post("/api/cards", authMiddleware, verifyRole(["admin", "seller"]), createCard);
+
 const verifyRole = (roles) => (req, res, next) => {
     console.log("User role:", req.user ? req.user.role : "No user");
     console.log("Allowed roles:", roles);
-
+    
     if (!req.user || !roles.includes(req.user.role)) {
         return res.status(403).json({ error: 'Access denied' });
     }
     next();
 };
+
 
 module.exports = { authMiddleware, verifyRole };

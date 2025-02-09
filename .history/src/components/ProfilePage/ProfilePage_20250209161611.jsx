@@ -220,9 +220,9 @@ const ProfilePage = () => {
                   </fieldset>
 
                   <button onClick={handleSave} className='save__changes btn'>Save Changes</button>
-                  {(user.role === "admin" || user.role === "seller") ? (<button className="toggle-form-button" onClick={openModal}>
+                  <button className="toggle-form-button" onClick={openModal}>
                     Add Apartment
-                  </button>) : (<div></div>)}
+                  </button>
                 </div>
 
               {/* Apartments Form */}

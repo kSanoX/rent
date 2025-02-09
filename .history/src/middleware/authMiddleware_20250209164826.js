@@ -28,6 +28,8 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
+app.post("/api/cards", authMiddleware, verifyRole(["admin", "seller"]), createCard);
+
 const verifyRole = (roles) => (req, res, next) => {
     console.log("User role:", req.user ? req.user.role : "No user");
     console.log("Allowed roles:", roles);

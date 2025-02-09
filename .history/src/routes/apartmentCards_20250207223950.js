@@ -52,7 +52,7 @@ router.get('/cards', async (req, res) => {
 });
 
 // Обработчик для загрузки
-router.post("/", authMiddleware, verifyRole(["admin"]), 
+router.post("/", authMiddleware, verifyRole(["admin", "seller"]), 
   uploadCover.single("image"), // для обложки
   uploadSlider.array("sliderImages", 5), // для слайдера, максимум 5 изображений
   async (req, res) => {

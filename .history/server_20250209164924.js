@@ -68,7 +68,7 @@ app.use("/api", uploadRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use("/api/apartments", uploadApartmentCardsRoute);
 app.use("/api", apartmentCardsRoute);
-app.post("/api/cards", authMiddleware, verifyRole(["admin", "seller"]), uploadApartmentCardsRoute);
+app.post("/api/cards", authMiddleware, verifyRole(["admin", "seller"]), createCard);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

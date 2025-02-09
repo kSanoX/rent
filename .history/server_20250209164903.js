@@ -14,7 +14,6 @@ const uploadApartmentCardsRoute = require('./src/routes/uploadApartmentCards');
 const CardModel = require('./src/models/ApartmentCard');
 const userRoutes = require("./src/routes/userRoutes");
 const uploadRoutes = require("./src/routes/upload.js");
-const { authMiddleware, verifyRole } = require('./src/middleware/authMiddleware');
 
 const app = express();
 app.use(cors());
@@ -68,7 +67,7 @@ app.use("/api", uploadRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use("/api/apartments", uploadApartmentCardsRoute);
 app.use("/api", apartmentCardsRoute);
-app.post("/api/cards", authMiddleware, verifyRole(["admin", "seller"]), uploadApartmentCardsRoute);
+app.post("/api/cards", authMiddleware, verifyRole(["admin", "seller"]), createCard);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

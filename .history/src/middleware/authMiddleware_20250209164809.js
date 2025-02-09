@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const express = require('express');
 
 const authMiddleware = (req, res, next) => {
     const token = req.header('Authorization');
@@ -27,6 +26,8 @@ const authMiddleware = (req, res, next) => {
         res.status(401).json({ error: 'Invalid token' });
     }
 };
+
+app.post("/api/cards", authMiddleware, verifyRole(["admin", "seller"]), createCard);
 
 const verifyRole = (roles) => (req, res, next) => {
     console.log("User role:", req.user ? req.user.role : "No user");

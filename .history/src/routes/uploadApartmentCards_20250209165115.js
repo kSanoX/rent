@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post("/", authMiddleware, verifyRole(["admin", "seller"]), upload.fields([
+router.post("/", authMiddleware, verifyRole(["admin"]), upload.fields([
   { name: "image", maxCount: 1 },
   { name: "sliderImages", maxCount: 5 }
 ]), async (req, res) => {
