@@ -1,0 +1,37 @@
+@import "../vars";
+
+.profile-cards-img {
+    width: 160px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.profile-cards-container {
+    padding: 32px;
+    border-radius: 32px;
+    border: 2px solid $grayShades15;
+    margin: 0px 120px;
+}
+
+.profile-cards-list {
+    display: flex;
+    gap: 16px;
+}
+
+.profile-cards-item {
+    max-width: 400px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-cards-buttons-container {
+    display: flex;
+    gap: 16px;
+    button {
+        @include purpleButton;
+        padding: 6px 12px;
+    }
+}

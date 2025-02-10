@@ -1,0 +1,15 @@
+@import "../vars";
+
+.profile-cards-img {
+    width: 160px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.profile-cards-container {
+    padding: 32px;
+    border-radius: 32px;
+    border: 2px solid $grayShades15;
+    display: flex;
+    gap: 16px;
+}
