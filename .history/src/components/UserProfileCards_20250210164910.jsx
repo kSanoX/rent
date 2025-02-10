@@ -90,7 +90,7 @@ const UserProfileCards = () => {
           <div className='modal-content'>
             <p>Are you sure you want to delete this card?</p>
             <button onClick={handleDelete}>Yes</button>
-            <button onClick={() => setShowModal(false)}>Cancel</button>
+            <button onClick={() => setShowModal(false)}>Отмена</button>
           </div>
         </div>
       )}

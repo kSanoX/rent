@@ -60,7 +60,9 @@ app.get("/api/cards/:_id", async (req, res) => {
 app.delete('/api/user-cards/:id', async (req, res) => {
   try {
       const { id } = req.params;
-      const deletedCard = await CardModel.findByIdAndDelete(id);
+      console.log("Получен ID для удаления:", id);
+
+      const deletedCard = await ApartmentCard.findByIdAndDelete(id);
 
       if (!deletedCard) {
           console.log("Карточка не найдена в базе данных.");

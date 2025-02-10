@@ -57,24 +57,18 @@ app.get("/api/cards/:_id", async (req, res) => {
   }
 });
 
-app.delete('/api/user-cards/:id', async (req, res) => {
-  try {
-      const { id } = req.params;
-      const deletedCard = await CardModel.findByIdAndDelete(id);
-
-      if (!deletedCard) {
-          console.log("Карточка не найдена в базе данных.");
-          return res.status(404).json({ success: false, error: 'Card not found' });
-      }
-
+app.delete('/api/user-cards/:id', (req, res) => {
+  const { id } = req.params;
+  
+  // Логика удаления карточки из базы данных
+  Card.findByIdAndDelete(id)
+    .then(() => {
       res.json({ success: true, message: 'Card deleted successfully' });
-  } catch (err) {
-      console.error("Ошибка при удалении карточки:", err);
+    })
+    .catch(err => {
       res.status(500).json({ success: false, error: 'Failed to delete card' });
-  }
+    });
 });
-
-
 
 app.use('/apartmentsImages', express.static(path.join(__dirname, 'public/apartmentsImages')));
 app.use('/api', filtersRouter);

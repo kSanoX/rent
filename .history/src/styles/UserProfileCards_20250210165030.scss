@@ -37,9 +37,9 @@
 }
 
 .modal-content {
-    gap: 8px;
     button {
         @include purpleButton;
         padding: 4px 8px;
+        margin-bottom: 8px;
     }
 }

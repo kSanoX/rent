@@ -147,9 +147,7 @@ function AboutAsPage() {
                         </div>
                     </div>
                 </div>
-
                 <WorkTeamCards></WorkTeamCards>
-                
                 <div className="reviews">
                     <FeaturedTitle title={"Our Valued Clients"} text={"At Estatein, we have had the privilege of working with a diverse range of clients across various industries. Here are some of the clients we've had the pleasure of serving"} showButton={false}></FeaturedTitle>
                     <div className="reviews__content">

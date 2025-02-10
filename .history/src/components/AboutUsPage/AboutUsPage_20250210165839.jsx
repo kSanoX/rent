@@ -6,8 +6,14 @@ import "./aboutUs.scss";
 import purpleStar from "../../images/icons/purpleStar.svg";
 import bakalavr from "../../images/icons/bakalavr.svg";
 import group from "../../images/icons/group.svg";
+import send from "../../images/icons/Send.svg";
+import twiter from "../../images/icons/twiter.svg"
 
 import aboutUsImg from "../../images/about_us_title.png";
+import teamProfilePhoto1 from "../../images/teamProfilePhoto.png";
+import teamProfilePhoto2 from "../../images/teamProfilePhoto2.png";
+import teamProfilePhoto3 from "../../images/teamProfilePhoto3.png";
+import teamProfilePhoto4 from "../../images/teamProfilePhoto4.png";
 import WorkTeamCards from "../WorkTeamCards";
 
 function AboutAsPage() {
@@ -147,9 +153,7 @@ function AboutAsPage() {
                         </div>
                     </div>
                 </div>
-
                 <WorkTeamCards></WorkTeamCards>
-                
                 <div className="reviews">
                     <FeaturedTitle title={"Our Valued Clients"} text={"At Estatein, we have had the privilege of working with a diverse range of clients across various industries. Here are some of the clients we've had the pleasure of serving"} showButton={false}></FeaturedTitle>
                     <div className="reviews__content">

@@ -23,4 +23,13 @@ router.get('/user', async (req, res) => {
     }
 });
 
+router.get("/users", async (req, res) => {
+    try {
+        const users = await User.find({}, "firstName lastName profilePhoto twitter"); // Выбираем нужные поля
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: "Ошибка получения пользователей" });
+    }
+});
+
 module.exports = router;

@@ -60,20 +60,18 @@ app.get("/api/cards/:_id", async (req, res) => {
 app.delete('/api/user-cards/:id', async (req, res) => {
   try {
       const { id } = req.params;
-      const deletedCard = await CardModel.findByIdAndDelete(id);
+      const deletedCard = await ApartmentCard.findByIdAndDelete(id);
 
       if (!deletedCard) {
-          console.log("Карточка не найдена в базе данных.");
           return res.status(404).json({ success: false, error: 'Card not found' });
       }
 
       res.json({ success: true, message: 'Card deleted successfully' });
   } catch (err) {
-      console.error("Ошибка при удалении карточки:", err);
+      console.error(err);
       res.status(500).json({ success: false, error: 'Failed to delete card' });
   }
 });
-
 
 
 app.use('/apartmentsImages', express.static(path.join(__dirname, 'public/apartmentsImages')));

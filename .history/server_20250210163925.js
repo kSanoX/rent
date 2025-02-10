@@ -60,6 +60,8 @@ app.get("/api/cards/:_id", async (req, res) => {
 app.delete('/api/user-cards/:id', async (req, res) => {
   try {
       const { id } = req.params;
+      console.log("Получен ID для удаления:", id);
+
       const deletedCard = await CardModel.findByIdAndDelete(id);
 
       if (!deletedCard) {

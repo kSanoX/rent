@@ -31,6 +31,7 @@ const ProfilePage = () => {
   const [propertySize, setPropertySize] = useState("");
   const [image, setImage] = useState(null);
   const [sliderImages, setSliderImages] = useState([]);
+  const [apartmentToEdit, setApartmentToEdit] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -46,8 +47,6 @@ const ProfilePage = () => {
     setPhone(user.phone || "");
     setMessage(user.message || "");
   }, [user]);
-  
-
 
   const handleAddApartment = async (e) => {
     e.preventDefault();
@@ -55,42 +54,42 @@ const ProfilePage = () => {
       alert("Добавьте изображение");
       return;
     }
-
+  
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("bedroomCount", bedroomCount);
-    formData.append("bathroomCount", bathroomCount);
-    formData.append("type", type);
+    formData.append("title", apartmentToEdit.title);
+    formData.append("description", apartmentToEdit.description);
+    formData.append("price", apartmentToEdit.price);
+    formData.append("bedroomCount", apartmentToEdit.bedroomCount);
+    formData.append("bathroomCount", apartmentToEdit.bathroomCount);
+    formData.append("type", apartmentToEdit.type);
     formData.append("image", image);
-    formData.append("buildYear", buildYear);
-    formData.append("sqm", propertySize);
-
+    formData.append("buildYear", apartmentToEdit.buildYear);
+    formData.append("sqm", apartmentToEdit.propertySize);
+  
     sliderImages.forEach((file, index) => {
       formData.append(`sliderImages`, file);
     });
-
+  
     try {
       const response = await fetch("http://localhost:5000/api/apartments", {
-        method: "POST",
+        method: apartmentToEdit._id ? "PUT" : "POST",  // если _id существует, обновляем квартиру
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: formData,
       });
-
+  
       const data = await response.json();
-
+  
       if (data.success) {
-        alert("Apartment posted!");
+        alert(apartmentToEdit._id ? "Apartment updated!" : "Apartment posted!");
       } else {
         alert("Ошибка: " + data.error);
       }
     } catch (error) {
       console.error("Ошибка запроса:", error);
     }
-  };
+  };  
 
   const handleSliderImageUpload = (e) => {
     const newFiles = Array.from(e.target.files);
@@ -230,80 +229,80 @@ const ProfilePage = () => {
 
               {/* Apartments Form */}
               {(isModalOpen && (user.role === "admin" || user.role === "seller")) && (
-                <div className="modal">
-                  <div className="modal-content">
-                    <span className="close" onClick={closeModal}>&times;</span>
-                    <h2 style={{ textAlign: "center" }}>Add apartment</h2>
-                    <form onSubmit={handleAddApartment} className='apartment-form'>
+                  <div className="modal">
+                    <div className="modal-content">
+                      <span className="close" onClick={closeModal}>&times;</span>
+                      <h2 style={{ textAlign: "center" }}>Add apartment</h2>
+                      <form onSubmit={handleAddApartment} className='apartment-form'>
                         <input
                           className="form-input"
                           type="text"
                           placeholder="Name"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
+                          value={apartmentToEdit.title || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, title: e.target.value })}
                           required
                         />
                         <textarea
                           className="form-textarea"
-                          placeholder="description"
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
+                          placeholder="Description"
+                          value={apartmentToEdit.description || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, description: e.target.value })}
                           required
                         />
                         <input
                           className="form-input"
                           type="number"
                           placeholder="Price"
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
+                          value={apartmentToEdit.price || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, price: e.target.value })}
                           required
                         />
                         <input
                           className="form-input"
                           type="number"
                           placeholder="Bedrooms"
-                          value={bedroomCount}
-                          onChange={(e) => setBedroomCount(e.target.value)}
+                          value={apartmentToEdit.bedroomCount || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, bedroomCount: e.target.value })}
                           required
                         />
                         <input
                           className="form-input"
                           type="number"
                           placeholder="Bathrooms"
-                          value={bathroomCount}
-                          onChange={(e) => setBathroomCount(e.target.value)}
+                          value={apartmentToEdit.bathroomCount || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, bathroomCount: e.target.value })}
                           required
                         />
                         <input
                           className="form-input"
                           type="text"
                           placeholder="Type"
-                          value={type}
-                          onChange={(e) => setType(e.target.value)}
+                          value={apartmentToEdit.type || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, type: e.target.value })}
                           required
                         />
                         <input
                           className="form-input"
                           type="text"
                           placeholder="Location"
-                          value={location}
-                          onChange={(e) => setLocation(e.target.value)}
+                          value={apartmentToEdit.location || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, location: e.target.value })}
                           required
                         />
                         <input
                           className="form-input"
                           type="number"
                           placeholder="Building Year"
-                          value={buildYear}
-                          onChange={(e) => setBuildYear(e.target.value)}
+                          value={apartmentToEdit.buildYear || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, buildYear: e.target.value })}
                           required
                         />
                         <input
                           className="form-input sqm"
                           type="text"
                           placeholder="sqm"
-                          value={propertySize}
-                          onChange={(e) => setPropertySize(e.target.value)}
+                          value={apartmentToEdit.propertySize || ""}
+                          onChange={(e) => setApartmentToEdit({ ...apartmentToEdit, propertySize: e.target.value })}
                           required
                         />
 
@@ -359,7 +358,7 @@ const ProfilePage = () => {
         )}
       </div>
       <h3 style={{textAlign: 'center', padding: "32px", fontSize: "32px"}}>My Posts</h3>
-      <UserProfileCards></UserProfileCards>
+      <UserProfileCards setApartmentToEdit={setApartmentToEdit} openModal={openModal}></UserProfileCards>
     </>
   );
 };
