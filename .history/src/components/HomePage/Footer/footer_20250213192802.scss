@@ -1,0 +1,54 @@
+@import "../../../vars";
+
+footer {
+    display: flex;
+    gap: 100px;
+    padding: 60px 162px;
+    align-items: flex-start;
+    min-width: 100$;
+}
+
+.logo-mail {
+    display: flex;
+    flex-direction: column;
+    input {
+        background-color: transparent; /* прозрачный фон */
+        border: none;
+        padding: 0;
+        color: white;
+    }
+}
+
+.email-input__container {
+    border: 1px solid $grayShades15;
+        border-radius: 12px;
+        padding: 22px 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 32px;
+        img {
+            margin-right: 10px;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+        }
+}
+
+.list {
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        li {
+            padding: 10px 10px 10px 0px;
+            cursor: pointer;
+            white-space: nowrap;
+            background-color: transparent;
+        }
+                span {
+                    @include defaultParagraph;
+                }
+    }
+}

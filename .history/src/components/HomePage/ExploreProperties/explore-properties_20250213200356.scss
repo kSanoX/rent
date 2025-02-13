@@ -1,0 +1,31 @@
+@import "../../../vars";
+
+.content {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px 160px 100px 160px;
+    gap: 120px;
+
+    button {
+        height: fit-content;
+        @include purpleButton;
+        white-space: nowrap;
+    }
+    h1 {
+        white-space: nowrap;
+        font-weight: $font-weight-semi-bold;
+    }
+
+    p {
+        @include defaultParagraph;
+    }
+}
+
+
+@media (max-width: 1320px) {
+    .content {
+        padding: 50px 80px;
+    }
+}

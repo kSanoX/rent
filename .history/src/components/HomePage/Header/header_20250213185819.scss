@@ -1,0 +1,58 @@
+@import "../../../_vars.scss";
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, $grayShades10, $grayShades15);
+    padding: 22px 162px;
+    z-index: 1000;
+    position: relative;
+    width:max-content;
+
+    ul {
+        display: flex;
+        li {
+            background-color: transparent;
+        }
+
+    }
+}
+
+.logo__link-to-home {
+    background: none;
+    border: none;
+}
+
+li  {
+    @include blackButton;  // Применяем основные стили
+    text-decoration: none;
+  
+    &:hover {  // Убираем ошибки и применяем hover и active
+      @include blackButtonWithBorders; // Применение миксина при наведении и активации
+    }
+  }
+  
+
+.contact__us-btn {
+    @include blackButtonWithBorders;
+    border: 0.1rem solid $grayShades15;
+}
+
+.nav__logout-btn {
+    @include purpleButton;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.nav__user {
+    display: flex;
+    align-items: center;
+    color: aquamarine;
+    gap: 20px;
+}
+
+
+
+  

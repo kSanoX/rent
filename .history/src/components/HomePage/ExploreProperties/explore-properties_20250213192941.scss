@@ -1,0 +1,52 @@
+@import "../../../vars";
+
+.exp-con__for-img {
+    position: relative;
+    border-bottom: 1px solid $grayShades15;
+    border-top: 1px solid $grayShades20;
+    margin: 100px 0px;
+    padding-bottom: 6px;
+}
+
+.supp-container {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    
+}
+
+.supp-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.content {
+    z-index: 1000;
+    position: relative;
+    color: #fff;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 100px 160px 100px 160px;
+    min-width: 78%;
+    gap: 120px;
+
+    button {
+        height: fit-content;
+        @include purpleButton;
+        white-space: nowrap;
+    }
+    h1 {
+        white-space: nowrap;
+        font-weight: $font-weight-semi-bold;
+    }
+
+    p {
+        @include defaultParagraph;
+    }
+}

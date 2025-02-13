@@ -1,0 +1,30 @@
+@import "../../../vars";
+
+.content {
+    z-index: 1000;
+    position: relative;
+    color: #fff;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 100px 160px 100px 160px;
+    min-width: 78%;
+    gap: 120px;
+    border-bottom: 1px solid $grayShades15;
+    border-top: 1px solid $grayShades20;
+
+    button {
+        height: fit-content;
+        @include purpleButton;
+        white-space: nowrap;
+    }
+    h1 {
+        white-space: nowrap;
+        font-weight: $font-weight-semi-bold;
+    }
+
+    p {
+        @include defaultParagraph;
+    }
+}

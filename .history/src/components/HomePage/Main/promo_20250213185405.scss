@@ -1,0 +1,107 @@
+@import "../../../vars";
+
+.promo__wrapper {
+    font-family: $font-primary;
+}
+
+.promo__section {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+}
+
+.radioImage {
+    width: 175px;
+    height: auto;
+    position: absolute;
+    right: 90%;
+    top: 13%;
+}
+
+.promo__left{
+    padding: 144px 0px 144px 162px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    gap: 60px;
+}
+
+.promo__title {
+    h1 {
+        font-size: 44px;
+        font-weight: $font-weight-semi-bold;
+        margin-bottom: 12px
+    }
+
+    p {
+       @include defaultParagraph;
+    }
+}
+
+.promo__buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.learn__more-btn {
+    @include blackButtonWithBorders;
+    border: 1px solid $grayShades15;
+}
+
+.browse__properties-btn {
+    @include purpleButton;
+    
+}
+
+.promo_info {
+    display: flex;
+    gap: 24px;
+    .promo_info-card {
+        padding: 16px 24px;
+        border: 1px solid $grayShades15;
+        border-radius: 10px;
+        background-color: $grayShades10;
+        h2{
+            margin-bottom: 12px;
+            font-weight: $font-weight-bold;
+            font-size: xx-large;
+        }
+
+        p {
+            @include defaultParagraph;
+        }
+    }
+}
+
+.promo__cards {
+    display: flex;
+    gap: 20px;
+    margin-top: 32px;
+    padding: 0 32px;
+}
+
+.card__items {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $grayShades10;
+    border-radius: 12px;
+    border: 1px solid $grayShades15;
+
+    .card__item-content {
+        margin-bottom: 20px;
+    }
+}
+
+.top-right-arrow {
+    position: absolute;  /* Абсолютное позиционирование */
+    top: 16px;          /* Отступ от верхнего края */
+    right: 16px;
+    width: 26px;         /* Ширина стрелки */
+    height: 26px;
+    cursor: pointer;
+}

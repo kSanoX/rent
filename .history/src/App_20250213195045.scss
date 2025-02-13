@@ -1,0 +1,73 @@
+@import "./vars";
+
+.page-wrapper {
+    // padding: 0px 280px;
+    position: relative;
+}
+
+body {
+    background-color: $grayShades08;
+    color: $whiteShades99;
+    font-family: $font-primary;
+    font-size: $font-size-large;
+    font-weight: $font-weight-italic;
+}
+
+.btn {
+  @include blackButtonWithBorders;
+  &:hover {
+    background-color: $grayShades15;
+    transition: 0.5s ease-in-out;
+  }
+
+  & {
+    transition: 0.2s ease-in-out;
+  }
+}
+
+.content__wrapper {
+    padding: 150px 162px 0px 162px;
+    min-width: 100%;
+}
+
+.title-sup {
+    @include TitleSup(200px, $grayShades10);
+  }
+
+  .page__listing {
+    @include pageListing($grayShades15, 50px, 20px, 8px, 50%, $grayShades10);
+    button {
+        margin-left: 16px;
+    }
+  }
+
+  a, .react-router-link {
+    text-decoration: none;  /* Убираем подчеркивание */
+    color: inherit;         /* Сохраняем текущий цвет */
+  }
+
+  a:visited, .react-router-link:visited {
+    color: inherit;         /* Убираем фиолетовый цвет для посещенных ссылок */
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }  
+
+
+  @media (max-width: 1440px) {
+    .featured__cards-container {
+
+    }
+
+    .content__wrapper {
+      padding: 144px 80px;
+      .featured__item {
+        min-width: 100%;
+        .featured__item-info {
+          gap: 6px;
+        }
+      }
+    }
+}

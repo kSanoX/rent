@@ -1,0 +1,16 @@
+@import "../vars";
+
+.seller-profile {
+    display: flex;
+    margin: 80px;
+    border: 2px solid $grayShades15;
+    border-radius: 16px;
+    padding: 32px;
+
+}
+
+.profile-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
