@@ -1,0 +1,74 @@
+@import "../../../vars";
+
+footer {
+    display: flex;
+    padding: 60px 80px;
+}
+
+.list__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.logo-mail {
+    display: flex;
+    flex-direction: column;
+    input {
+        background-color: transparent; /* прозрачный фон */
+        border: none;
+        padding: 0;
+        color: white;
+    }
+}
+
+.email-input__container {
+    border: 1px solid $grayShades15;
+        border-radius: 12px;
+        padding: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 32px;
+        width: auto;
+        img {
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+        }
+}
+
+.list {
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        li {
+            padding: 10px 10px 10px 0px;
+            cursor: pointer;
+            white-space: nowrap;
+            background-color: transparent;
+        }
+                span {
+                    @include defaultParagraph;
+                }
+    }
+}
+
+@media (max-width: 1028px) {
+    footer {
+        flex-direction: column;
+    }
+    .list__container {
+       display: grid;
+       grid-template-columns: 2fr auto;
+    }
+}
+
+@media (max-width: 768px) {
+    
+}

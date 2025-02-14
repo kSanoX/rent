@@ -1,0 +1,96 @@
+@import '../../vars';
+
+
+.properties-content__wrapper {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.table-of-content {
+    padding: 150px 0px 100px 0px;
+    h1 {
+        font-weight: $font-weight-semi-bold;
+    }
+
+    p {
+        @include defaultParagraph;
+    }
+}
+
+.filter-table {
+    margin-bottom: 120px;
+}
+
+.find__properties {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $grayShades08;
+    border: 2px solid $grayShades20;
+    border-radius: 12px;
+    input {
+        background-color: transparent;
+        border: none;
+        padding: 34px 24px;
+        color: white;
+        font-size: $font-size-xl;
+        width: 100%;
+    }
+    button {
+        @include purpleButton;
+        margin-right: 16px;
+        padding-right: 32px;
+        white-space: nowrap;
+        img {
+            margin-right: 6px;
+        }
+    }
+}
+
+.outline {
+    background-color: $grayShades10;
+    padding: 12px;
+    border-radius: 12px;
+    margin: 0 150px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.outline-for__filters {
+    background-color: $grayShades10;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.filters-for__properties {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    input {
+        background-color: transparent;
+        border: none;
+        width: 80%;
+        margin-left: 12px;
+        color: white;
+    }
+}
+
+.filter__item {
+    border: 2px solid $grayShades20;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    background-color: $grayShades08;
+    button {
+        border: none;
+        background-color: $grayShades15;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+    }
+}

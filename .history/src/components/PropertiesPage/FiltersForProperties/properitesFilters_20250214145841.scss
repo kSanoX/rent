@@ -1,0 +1,63 @@
+@import "../../../vars";
+
+.filters-for__properties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-around;
+  }
+  
+  .filter__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid $grayShades30;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: transparent;
+    width: 17%;
+  }
+  
+  .filter__item select {
+    flex: 1;
+  }
+
+  .happen__select {
+    border: none;
+  }
+  
+  .filter__item img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .filter__item button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: $grayShades10;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none;
+    padding: 8px 4px;
+    margin: 0;
+  }
+  
+  .dropdown li {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .dropdown li:hover {
+    color: aqua;
+    border: 1px solid $grayShades15;
+  }
