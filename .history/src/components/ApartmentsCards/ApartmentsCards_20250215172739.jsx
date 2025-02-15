@@ -42,17 +42,14 @@ function ApartmentsCards({ filters }) {
 
                     const cardValue = card[key];
 
-                    // Обработка диапазона цен
                     if (key === "Pricing Range") {
                         return compareValue(cardValue, value, "$");
                     }
 
-                    // Обработка диапазона площади
                     if (key === "Property Size") {
                         return compareValue(cardValue, value, "sqm");
                     }
 
-                    // Для других фильтров сравниваем строки
                     return (
                         cardValue &&
                         cardValue.toString().toLowerCase().includes(value.toLowerCase())
@@ -80,7 +77,6 @@ function ApartmentsCards({ filters }) {
         let normalizedCardValue = normalizeValue(cardValue);
         const rangeRegex = /(\d+)\s?-\s?(\d+)/;
 
-        // Обработка диапазонов (например, цен или площади)
         if (filterValue.match(rangeRegex)) {
             const matches = filterValue.match(rangeRegex);
             const minValue = normalizeValue(matches[1]);

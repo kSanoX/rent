@@ -42,21 +42,18 @@ function ApartmentsCards({ filters }) {
 
                     const cardValue = card[key];
 
-                    // Обработка диапазона цен
-                    if (key === "Pricing Range") {
-                        return compareValue(cardValue, value, "$");
+                    // Логируем фильтры и карточки
+                    console.log(`Filtering by ${key}:`, value, cardValue);
+
+                    if (key === "price" || key === "propertySize") {
+                        return compareValue(cardValue, value, key);
                     }
 
-                    // Обработка диапазона площади
-                    if (key === "Property Size") {
-                        return compareValue(cardValue, value, "sqm");
-                    }
-
-                    // Для других фильтров сравниваем строки
                     return (
                         cardValue &&
-                        cardValue.toString().toLowerCase().includes(value.toLowerCase())
-                    );
+                        typeof cardValue === 'string' &&
+                        cardValue.toLowerCase().includes(value.toLowerCase())
+                    );                    
                 });
             });
         }
@@ -65,28 +62,34 @@ function ApartmentsCards({ filters }) {
     };
 
     const normalizeValue = (value) => {
+        // Проверим, что мы нормально конвертируем значения
+        console.log('Normalizing value:', value);
         if (value && typeof value === "string") {
             const numericValue = value.replace(/[^\d]/g, "");
-            return numericValue ? parseInt(numericValue, 10) : 0;
+            const normalized = numericValue ? parseInt(numericValue, 10) : 0;
+            console.log('Normalized value (string):', normalized);
+            return normalized;
         } else if (typeof value === "number") {
+            console.log('Normalized value (number):', value);
             return value;
         }
         return 0;
     };
 
-    const compareValue = (cardValue, filterValue, unit) => {
+    const compareValue = (cardValue, filterValue, key) => {
+        console.log(`Comparing ${key} with values: cardValue = ${cardValue}, filterValue = ${filterValue}`);
+        
         if (!cardValue || !filterValue) return false;
 
         let normalizedCardValue = normalizeValue(cardValue);
-        const rangeRegex = /(\d+)\s?-\s?(\d+)/;
+        let normalizedFilterValue = normalizeValue(filterValue);
 
-        // Обработка диапазонов (например, цен или площади)
-        if (filterValue.match(rangeRegex)) {
-            const matches = filterValue.match(rangeRegex);
-            const minValue = normalizeValue(matches[1]);
-            const maxValue = normalizeValue(matches[2]);
+        // Логируем нормализованные значения
+        console.log('Normalized values:', normalizedCardValue, normalizedFilterValue);
 
-            return normalizedCardValue >= minValue && normalizedCardValue <= maxValue;
+        if (key === "price" || key === "propertySize") {
+            // Для цены и площади нужно делать точное сравнение
+            return normalizedCardValue === normalizedFilterValue;
         }
 
         return false;

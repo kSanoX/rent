@@ -14,7 +14,7 @@ function ApartmentsCards({ filters }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Get cards in API
+        // Получаем карточки из API
         const fetchApartmentCards = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/cards');
@@ -34,63 +34,48 @@ function ApartmentsCards({ filters }) {
 
     const applyFilters = () => {
         let filtered = apartmentCards;
-
+      
         if (filters) {
-            filtered = filtered.filter((card) => {
-                return Object.entries(filters).every(([key, value]) => {
-                    if (!value) return true; // Пропустить, если фильтр пустой
-
-                    const cardValue = card[key];
-
-                    // Обработка диапазона цен
-                    if (key === "Pricing Range") {
-                        return compareValue(cardValue, value, "$");
-                    }
-
-                    // Обработка диапазона площади
-                    if (key === "Property Size") {
-                        return compareValue(cardValue, value, "sqm");
-                    }
-
-                    // Для других фильтров сравниваем строки
-                    return (
-                        cardValue &&
-                        cardValue.toString().toLowerCase().includes(value.toLowerCase())
-                    );
-                });
+          filtered = filtered.filter((card) => {
+            return Object.entries(filters).every(([key, value]) => {
+              if (!value || value.length === 0) return true; // Пропустить, если фильтр пустой
+      
+              const cardValue = card[key];
+      
+              console.log(`Filtering by ${key}:`, value, cardValue);
+      
+              // Для price и propertySize проверяем, если значение в списке опций или меньше указанного значения
+              if (key === "price" || key === "propertySize") {
+                return compareRangeValues(cardValue, value); // Используем функцию для диапазонов
+              }
+      
+              return (
+                cardValue &&
+                typeof cardValue === 'string' &&
+                cardValue.toLowerCase().includes(value.toLowerCase())
+              );
             });
+          });
         }
-
+      
         setFilteredCards(filtered);
-    };
+      };
 
-    const normalizeValue = (value) => {
-        if (value && typeof value === "string") {
-            const numericValue = value.replace(/[^\d]/g, "");
-            return numericValue ? parseInt(numericValue, 10) : 0;
-        } else if (typeof value === "number") {
-            return value;
+      const compareRangeValues = (cardValue, filterValue) => {
+        // Убедимся, что filterValue - это строка перед использованием match
+        if (typeof filterValue === 'string') {
+          const rangeMatch = filterValue.match(/^до (\d+)$/); // Пример: "до 20000"
+        
+          if (rangeMatch) {
+            const limit = parseInt(rangeMatch[1], 10);
+            return cardValue <= limit; // Проверяем, меньше ли или равно значение карточки лимиту
+          }
         }
-        return 0;
-    };
-
-    const compareValue = (cardValue, filterValue, unit) => {
-        if (!cardValue || !filterValue) return false;
-
-        let normalizedCardValue = normalizeValue(cardValue);
-        const rangeRegex = /(\d+)\s?-\s?(\d+)/;
-
-        // Обработка диапазонов (например, цен или площади)
-        if (filterValue.match(rangeRegex)) {
-            const matches = filterValue.match(rangeRegex);
-            const minValue = normalizeValue(matches[1]);
-            const maxValue = normalizeValue(matches[2]);
-
-            return normalizedCardValue >= minValue && normalizedCardValue <= maxValue;
-        }
-
-        return false;
-    };
+      
+        return false; // Если фильтр не соответствует диапазону, возвращаем false
+      };
+      
+    
 
     const cardsPerPage = 3;
     const totalPages = Math.ceil(filteredCards.length / cardsPerPage);

@@ -42,21 +42,15 @@ function ApartmentsCards({ filters }) {
 
                     const cardValue = card[key];
 
-                    // Обработка диапазона цен
-                    if (key === "Pricing Range") {
-                        return compareValue(cardValue, value, "$");
+                    if (key === "price" || key === "propertySize") {
+                        return compareValue(cardValue, value);
                     }
 
-                    // Обработка диапазона площади
-                    if (key === "Property Size") {
-                        return compareValue(cardValue, value, "sqm");
-                    }
-
-                    // Для других фильтров сравниваем строки
                     return (
                         cardValue &&
-                        cardValue.toString().toLowerCase().includes(value.toLowerCase())
-                    );
+                        typeof cardValue === 'string' &&
+                        cardValue.toLowerCase().includes(value.toLowerCase())
+                    );                    
                 });
             });
         }
@@ -74,22 +68,13 @@ function ApartmentsCards({ filters }) {
         return 0;
     };
 
-    const compareValue = (cardValue, filterValue, unit) => {
+    const compareValue = (cardValue, filterValue) => {
         if (!cardValue || !filterValue) return false;
 
         let normalizedCardValue = normalizeValue(cardValue);
-        const rangeRegex = /(\d+)\s?-\s?(\d+)/;
+        let normalizedFilterValue = normalizeValue(filterValue);
 
-        // Обработка диапазонов (например, цен или площади)
-        if (filterValue.match(rangeRegex)) {
-            const matches = filterValue.match(rangeRegex);
-            const minValue = normalizeValue(matches[1]);
-            const maxValue = normalizeValue(matches[2]);
-
-            return normalizedCardValue >= minValue && normalizedCardValue <= maxValue;
-        }
-
-        return false;
+        return normalizedCardValue === normalizedFilterValue;
     };
 
     const cardsPerPage = 3;

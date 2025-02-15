@@ -51,33 +51,35 @@ const FiltersForProperties = ({ onFiltersChange }) => {
     setActiveFilter(activeFilter === filterName ? null : filterName);
   };
 
+  const handleInputChange = (filterName, value) => {
+    setFilterInputs((prev) => {
+      const updatedFilters = { ...prev, [filterName]: value };
+  
+      // Обновляем фильтры после изменения значения
+      onFiltersChange(updatedFilters);
+      return updatedFilters;
+    });
+  };
+  
+  
+
   const selectOption = (filterName, option) => {
-    setFilterInputs((prev) => ({
-      ...prev,
-      [filterName]: option,
-    }));
-    setActiveFilter(null);
-
-    onFiltersChange({ ...filterInputs, [filterName]: option });
-  };
-
-  const getFilterOptions = (filter) => {
-    // Для каждого фильтра проверяем, какое поле использовать для опций
-    switch (filter.name) {
-      case "price":
-        return filter.priceOptions;
-      case "propertySize":
-        return filter.sizeOptions;
-      case "location":
-        return filter.locationOptions;
-      case "type":
-        return filter.typeOptions;
-      case "buildYear":
-        return filter.yearOptions;
-      default:
-        return [];
-    }
-  };
+    const formattedOption =
+      filterName === "price" || filterName === "propertySize"
+        ? parseInt(option, 10) || option
+        : option;
+  
+    setFilterInputs((prev) => {
+      const updatedFilters = { ...prev, [filterName]: formattedOption };
+  
+      // Обновляем фильтры после выбора опции
+      onFiltersChange(updatedFilters);
+      return updatedFilters;
+    });
+  
+    setActiveFilter(null); // Закрываем выпадающий список
+  };  
+  
 
   return (
     <div className="filters-for__properties">
@@ -92,27 +94,39 @@ const FiltersForProperties = ({ onFiltersChange }) => {
               filter.name === "location"
                 ? locationImg
                 : filter.name === "type"
-                ? propertyTypeImg
-                : filter.name === "price"
-                ? pricingRangeImg
-                : buildYearImg
+                  ? propertyTypeImg
+                  : filter.name === "price"
+                    ? pricingRangeImg
+                    : buildYearImg
             }
             alt=""
           />
           <input
             type="text"
             placeholder={filter.name}
-            value={filterInputs[filter.name]}
+            value={
+              filter.name === "price"
+                ? `до ${filterInputs[filter.name] ?? ""}$`
+                : filter.name === "propertySize"
+                ? `до ${filterInputs[filter.name] ?? ""} sqm`
+                : filterInputs[filter.name] ?? ""
+            }            
             onClick={() => toggleFilter(filter.name)}
-            readOnly
+            onChange={(e) => handleInputChange(filter.name, e.target.value)}
           />
+
           {activeFilter === filter.name && (
             <ul className="dropdown">
-              {getFilterOptions(filter).map((option, i) => (
+              {filter.options.map((option, i) => (
                 <li key={i} onClick={() => selectOption(filter.name, option)}>
-                  {option}
+                  {filter.name === "price"
+                    ? `до ${option}$`
+                    : filter.name === "propertySize"
+                      ? `до ${option} sqm`
+                      : option}
                 </li>
               ))}
+
             </ul>
           )}
         </div>

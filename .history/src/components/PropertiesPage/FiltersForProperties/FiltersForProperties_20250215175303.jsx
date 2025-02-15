@@ -61,24 +61,6 @@ const FiltersForProperties = ({ onFiltersChange }) => {
     onFiltersChange({ ...filterInputs, [filterName]: option });
   };
 
-  const getFilterOptions = (filter) => {
-    // Для каждого фильтра проверяем, какое поле использовать для опций
-    switch (filter.name) {
-      case "price":
-        return filter.priceOptions;
-      case "propertySize":
-        return filter.sizeOptions;
-      case "location":
-        return filter.locationOptions;
-      case "type":
-        return filter.typeOptions;
-      case "buildYear":
-        return filter.yearOptions;
-      default:
-        return [];
-    }
-  };
-
   return (
     <div className="filters-for__properties">
       {filterData.map((filter, index) => (
@@ -108,9 +90,9 @@ const FiltersForProperties = ({ onFiltersChange }) => {
           />
           {activeFilter === filter.name && (
             <ul className="dropdown">
-              {getFilterOptions(filter).map((option, i) => (
-                <li key={i} onClick={() => selectOption(filter.name, option)}>
-                  {option}
+              {filter.options.map((option, i) => (
+                <li key={i} onClick={() => selectOption(filter.name, option + (filter.name === "price" ? "$+" : filter.name === "propertySize" ? " sqm+" : ""))}>
+                  {option}{filter.name === "price" ? "$+" : filter.name === "propertySize" ? " sqm+" : ""}
                 </li>
               ))}
             </ul>

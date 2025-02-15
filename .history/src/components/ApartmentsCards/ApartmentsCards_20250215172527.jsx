@@ -29,67 +29,41 @@ function ApartmentsCards({ filters }) {
     }, []);
 
     useEffect(() => {
-        applyFilters();
-    }, [filters, apartmentCards]);
+        // Apply filters only when apartmentCards are fetched and filters are set
+        if (apartmentCards.length > 0 && filters) {
+            applyFilters(apartmentCards, filters);
+        }
+    }, [filters, apartmentCards]); // Add apartmentCards as a dependency
 
-    const applyFilters = () => {
-        let filtered = apartmentCards;
+    const applyFilters = (apartments = [], filters = {}) => {
+        if (!filters || Object.keys(filters).length === 0) {
+            setFilteredCards(apartments); // Если фильтры пустые, возвращаем все квартиры
+            return;
+        }
 
-        if (filters) {
-            filtered = filtered.filter((card) => {
-                return Object.entries(filters).every(([key, value]) => {
-                    if (!value) return true; // Пропустить, если фильтр пустой
+        const filtered = apartments.filter((apartment) => {
+            return Object.keys(filters).every((key) => {
+                const filterValue = filters[key];
+                const apartmentValue = apartment[key];
 
-                    const cardValue = card[key];
+                if (key === "price") {
+                    const { min, max } = filterValue;
+                    return apartmentValue >= min && apartmentValue <= max;
+                }
 
-                    // Обработка диапазона цен
-                    if (key === "Pricing Range") {
-                        return compareValue(cardValue, value, "$");
-                    }
+                if (typeof apartmentValue === 'string') {
+                    return apartmentValue.toLowerCase().includes(filterValue.toLowerCase());
+                }
 
-                    // Обработка диапазона площади
-                    if (key === "Property Size") {
-                        return compareValue(cardValue, value, "sqm");
-                    }
+                if (typeof apartmentValue === 'number') {
+                    return apartmentValue <= Number(filterValue);
+                }
 
-                    // Для других фильтров сравниваем строки
-                    return (
-                        cardValue &&
-                        cardValue.toString().toLowerCase().includes(value.toLowerCase())
-                    );
-                });
+                return true;
             });
-        }
+        });
 
-        setFilteredCards(filtered);
-    };
-
-    const normalizeValue = (value) => {
-        if (value && typeof value === "string") {
-            const numericValue = value.replace(/[^\d]/g, "");
-            return numericValue ? parseInt(numericValue, 10) : 0;
-        } else if (typeof value === "number") {
-            return value;
-        }
-        return 0;
-    };
-
-    const compareValue = (cardValue, filterValue, unit) => {
-        if (!cardValue || !filterValue) return false;
-
-        let normalizedCardValue = normalizeValue(cardValue);
-        const rangeRegex = /(\d+)\s?-\s?(\d+)/;
-
-        // Обработка диапазонов (например, цен или площади)
-        if (filterValue.match(rangeRegex)) {
-            const matches = filterValue.match(rangeRegex);
-            const minValue = normalizeValue(matches[1]);
-            const maxValue = normalizeValue(matches[2]);
-
-            return normalizedCardValue >= minValue && normalizedCardValue <= maxValue;
-        }
-
-        return false;
+        setFilteredCards(filtered); // Set filtered apartments
     };
 
     const cardsPerPage = 3;

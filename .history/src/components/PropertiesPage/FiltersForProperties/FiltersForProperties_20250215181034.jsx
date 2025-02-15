@@ -52,31 +52,19 @@ const FiltersForProperties = ({ onFiltersChange }) => {
   };
 
   const selectOption = (filterName, option) => {
-    setFilterInputs((prev) => ({
-      ...prev,
-      [filterName]: option,
-    }));
+    setFilterInputs((prev) => {
+      const newFilters = {
+        ...prev,
+        [filterName]: option,
+      };
+      
+      // Передаем обновленные фильтры в родительский компонент
+      onFiltersChange(newFilters);
+      
+      return newFilters;
+    });
+    
     setActiveFilter(null);
-
-    onFiltersChange({ ...filterInputs, [filterName]: option });
-  };
-
-  const getFilterOptions = (filter) => {
-    // Для каждого фильтра проверяем, какое поле использовать для опций
-    switch (filter.name) {
-      case "price":
-        return filter.priceOptions;
-      case "propertySize":
-        return filter.sizeOptions;
-      case "location":
-        return filter.locationOptions;
-      case "type":
-        return filter.typeOptions;
-      case "buildYear":
-        return filter.yearOptions;
-      default:
-        return [];
-    }
   };
 
   return (
@@ -108,9 +96,18 @@ const FiltersForProperties = ({ onFiltersChange }) => {
           />
           {activeFilter === filter.name && (
             <ul className="dropdown">
-              {getFilterOptions(filter).map((option, i) => (
-                <li key={i} onClick={() => selectOption(filter.name, option)}>
+              {filter.options.map((option, i) => (
+                <li
+                  key={i}
+                  onClick={() => selectOption(
+                    filter.name, 
+                    filter.name === "price" || filter.name === "propertySize" 
+                      ? `${option}${filter.name === "price" ? "$+" : " sqm+"}` 
+                      : option
+                  )}
+                >
                   {option}
+                  {filter.name === "price" ? "$+" : filter.name === "propertySize" ? " sqm+" : ""}
                 </li>
               ))}
             </ul>

@@ -52,31 +52,20 @@ const FiltersForProperties = ({ onFiltersChange }) => {
   };
 
   const selectOption = (filterName, option) => {
+    const formattedOption =
+      filterName === "price"
+        ? `до ${option}$`
+        : filterName === "propertySize"
+          ? `до ${option} sqm`
+          : option;
+
     setFilterInputs((prev) => ({
       ...prev,
-      [filterName]: option,
+      [filterName]: formattedOption,
     }));
     setActiveFilter(null);
 
-    onFiltersChange({ ...filterInputs, [filterName]: option });
-  };
-
-  const getFilterOptions = (filter) => {
-    // Для каждого фильтра проверяем, какое поле использовать для опций
-    switch (filter.name) {
-      case "price":
-        return filter.priceOptions;
-      case "propertySize":
-        return filter.sizeOptions;
-      case "location":
-        return filter.locationOptions;
-      case "type":
-        return filter.typeOptions;
-      case "buildYear":
-        return filter.yearOptions;
-      default:
-        return [];
-    }
+    onFiltersChange({ ...filterInputs, [filterName]: formattedOption });
   };
 
   return (
@@ -92,10 +81,10 @@ const FiltersForProperties = ({ onFiltersChange }) => {
               filter.name === "location"
                 ? locationImg
                 : filter.name === "type"
-                ? propertyTypeImg
-                : filter.name === "price"
-                ? pricingRangeImg
-                : buildYearImg
+                  ? propertyTypeImg
+                  : filter.name === "price"
+                    ? pricingRangeImg
+                    : buildYearImg
             }
             alt=""
           />
@@ -108,9 +97,10 @@ const FiltersForProperties = ({ onFiltersChange }) => {
           />
           {activeFilter === filter.name && (
             <ul className="dropdown">
-              {getFilterOptions(filter).map((option, i) => (
+              {filter.options.map((option, i) => (
                 <li key={i} onClick={() => selectOption(filter.name, option)}>
                   {option}
+                  {filter.name === "price" ? "$+" : filter.name === "propertySize" ? " sqm+" : ""}
                 </li>
               ))}
             </ul>

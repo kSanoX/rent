@@ -29,68 +29,35 @@ function ApartmentsCards({ filters }) {
     }, []);
 
     useEffect(() => {
-        applyFilters();
-    }, [filters, apartmentCards]);
-
-    const applyFilters = () => {
-        let filtered = apartmentCards;
-
         if (filters) {
-            filtered = filtered.filter((card) => {
-                return Object.entries(filters).every(([key, value]) => {
-                    if (!value) return true; // Пропустить, если фильтр пустой
-
-                    const cardValue = card[key];
-
-                    // Обработка диапазона цен
-                    if (key === "Pricing Range") {
-                        return compareValue(cardValue, value, "$");
-                    }
-
-                    // Обработка диапазона площади
-                    if (key === "Property Size") {
-                        return compareValue(cardValue, value, "sqm");
-                    }
-
-                    // Для других фильтров сравниваем строки
-                    return (
-                        cardValue &&
-                        cardValue.toString().toLowerCase().includes(value.toLowerCase())
-                    );
-                });
-            });
+            applyFilters(apartmentCards, filters);
         }
+    }, [filters, apartmentCards]);    
 
-        setFilteredCards(filtered);
-    };
-
-    const normalizeValue = (value) => {
-        if (value && typeof value === "string") {
-            const numericValue = value.replace(/[^\d]/g, "");
-            return numericValue ? parseInt(numericValue, 10) : 0;
-        } else if (typeof value === "number") {
-            return value;
-        }
-        return 0;
-    };
-
-    const compareValue = (cardValue, filterValue, unit) => {
-        if (!cardValue || !filterValue) return false;
-
-        let normalizedCardValue = normalizeValue(cardValue);
-        const rangeRegex = /(\d+)\s?-\s?(\d+)/;
-
-        // Обработка диапазонов (например, цен или площади)
-        if (filterValue.match(rangeRegex)) {
-            const matches = filterValue.match(rangeRegex);
-            const minValue = normalizeValue(matches[1]);
-            const maxValue = normalizeValue(matches[2]);
-
-            return normalizedCardValue >= minValue && normalizedCardValue <= maxValue;
-        }
-
-        return false;
-    };
+    const applyFilters = (apartments, filters) => {
+        return apartments.filter((apartment) => {
+          return Object.keys(filters).every((key) => {
+            const filterValue = filters[key];
+            const apartmentValue = apartment[key];
+      
+            if (key === "price") {
+              // Если фильтр — это диапазон цен, фильтруем по этому диапазону
+              const { min, max } = filterValue;
+              return apartmentValue >= min && apartmentValue <= max;
+            }
+      
+            if (typeof apartmentValue === 'string') {
+              return apartmentValue.toLowerCase().includes(filterValue.toLowerCase());
+            }
+      
+            if (typeof apartmentValue === 'number') {
+              return apartmentValue <= Number(filterValue);
+            }
+      
+            return true;
+          });
+        });
+      };
 
     const cardsPerPage = 3;
     const totalPages = Math.ceil(filteredCards.length / cardsPerPage);

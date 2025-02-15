@@ -33,50 +33,34 @@ const FiltersForProperties = ({ onFiltersChange }) => {
   }, []);
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (
-        activeFilter &&
-        dropdownRefs.current[activeFilter] &&
-        !dropdownRefs.current[activeFilter].contains(event.target)
-      ) {
-        setActiveFilter(null);
-      }
-    };
-
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => document.removeEventListener("mousedown", handleOutsideClick);
-  }, [activeFilter]);
+    // Отладка: проверяем, что данные фильтров передаются в родительский компонент
+    console.log("Filter inputs updated:", filterInputs);
+    onFiltersChange(filterInputs);
+}, [filterInputs, onFiltersChange]);
 
   const toggleFilter = (filterName) => {
     setActiveFilter(activeFilter === filterName ? null : filterName);
   };
 
-  const selectOption = (filterName, option) => {
-    setFilterInputs((prev) => ({
-      ...prev,
-      [filterName]: option,
-    }));
-    setActiveFilter(null);
-
-    onFiltersChange({ ...filterInputs, [filterName]: option });
+  const handleInputChange = (filterName, value) => {
+    setFilterInputs((prev) => {
+      const updatedFilters = { ...prev, [filterName]: value };
+      return updatedFilters;
+    });
   };
 
-  const getFilterOptions = (filter) => {
-    // Для каждого фильтра проверяем, какое поле использовать для опций
-    switch (filter.name) {
-      case "price":
-        return filter.priceOptions;
-      case "propertySize":
-        return filter.sizeOptions;
-      case "location":
-        return filter.locationOptions;
-      case "type":
-        return filter.typeOptions;
-      case "buildYear":
-        return filter.yearOptions;
-      default:
-        return [];
-    }
+  const selectOption = (filterName, option) => {
+    // Обновляем только цену или площадь как числа
+    const updatedValue = (filterName === "price" || filterName === "propertySize") 
+      ? Number(option) 
+      : option;
+
+    setFilterInputs((prev) => {
+      const updatedFilters = { ...prev, [filterName]: updatedValue };
+      return updatedFilters;
+    });
+
+    setActiveFilter(null);
   };
 
   return (
@@ -102,15 +86,30 @@ const FiltersForProperties = ({ onFiltersChange }) => {
           <input
             type="text"
             placeholder={filter.name}
-            value={filterInputs[filter.name]}
+            value={
+              filter.name === "price"
+                ? filterInputs[filter.name] !== "" 
+                    ? `до ${filterInputs[filter.name]}$` 
+                    : ""
+                : filter.name === "propertySize"
+                ? filterInputs[filter.name] !== "" 
+                    ? `до ${filterInputs[filter.name]} sqm` 
+                    : ""
+                : filterInputs[filter.name] ?? ""
+            }
             onClick={() => toggleFilter(filter.name)}
-            readOnly
+            onChange={(e) => handleInputChange(filter.name, e.target.value)}
           />
+
           {activeFilter === filter.name && (
             <ul className="dropdown">
-              {getFilterOptions(filter).map((option, i) => (
+              {filter.options.map((option, i) => (
                 <li key={i} onClick={() => selectOption(filter.name, option)}>
-                  {option}
+                  {filter.name === "price"
+                    ? `до ${option}$`
+                    : filter.name === "propertySize"
+                    ? `до ${option} sqm`
+                    : option}
                 </li>
               ))}
             </ul>

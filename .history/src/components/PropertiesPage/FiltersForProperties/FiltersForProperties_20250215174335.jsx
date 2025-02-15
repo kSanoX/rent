@@ -9,6 +9,7 @@ const FiltersForProperties = ({ onFiltersChange }) => {
   const [activeFilter, setActiveFilter] = useState(null);
   const [filterInputs, setFilterInputs] = useState({});
   const [filterData, setFilterData] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const dropdownRefs = useRef({});
 
   useEffect(() => {
@@ -16,14 +17,8 @@ const FiltersForProperties = ({ onFiltersChange }) => {
       try {
         const response = await fetch("http://localhost:5000/api/filters");
         const data = await response.json();
+        console.log("Received filter data:", data); // Логирование данных с сервера
         setFilterData(data);
-
-        // Инициализируем фильтры
-        const initialInputs = {};
-        data.forEach((filter) => {
-          initialInputs[filter.name] = "";
-        });
-        setFilterInputs(initialInputs);
       } catch (err) {
         console.error("Ошибка загрузки фильтров:", err);
       }
@@ -49,34 +44,25 @@ const FiltersForProperties = ({ onFiltersChange }) => {
 
   const toggleFilter = (filterName) => {
     setActiveFilter(activeFilter === filterName ? null : filterName);
+    setSearchText(""); // Сброс текста поиска при переключении фильтра
   };
 
   const selectOption = (filterName, option) => {
-    setFilterInputs((prev) => ({
-      ...prev,
-      [filterName]: option,
-    }));
+    const updatedFilters = { ...filterInputs, [filterName]: option };
+    setFilterInputs(updatedFilters); // Обновляем локальное состояние фильтров
+
     setActiveFilter(null);
 
-    onFiltersChange({ ...filterInputs, [filterName]: option });
+    // Передаем фильтры наверх
+    onFiltersChange(updatedFilters); // Теперь передаем обновленный объект фильтров
   };
 
-  const getFilterOptions = (filter) => {
-    // Для каждого фильтра проверяем, какое поле использовать для опций
-    switch (filter.name) {
-      case "price":
-        return filter.priceOptions;
-      case "propertySize":
-        return filter.sizeOptions;
-      case "location":
-        return filter.locationOptions;
-      case "type":
-        return filter.typeOptions;
-      case "buildYear":
-        return filter.yearOptions;
-      default:
-        return [];
-    }
+  // Фильтрация опций по введенному тексту
+  const filterOptions = (options) => {
+    // Проверяем, что options определен и является массивом
+    return Array.isArray(options) ? options.filter(option => 
+      option.toLowerCase().includes(searchText.toLowerCase())
+    ) : [];
   };
 
   return (
@@ -104,15 +90,43 @@ const FiltersForProperties = ({ onFiltersChange }) => {
             placeholder={filter.name}
             value={filterInputs[filter.name]}
             onClick={() => toggleFilter(filter.name)}
-            readOnly
+            onChange={(e) => setSearchText(e.target.value)} // Обработчик для поиска
           />
           {activeFilter === filter.name && (
             <ul className="dropdown">
-              {getFilterOptions(filter).map((option, i) => (
-                <li key={i} onClick={() => selectOption(filter.name, option)}>
-                  {option}
-                </li>
-              ))}
+              {filter.name === "price" ? (
+                // Для фильтра цен отображаем диапазоны
+                filter.options.map((option, i) => (
+                  <li
+                    key={i}
+                    onClick={() => selectOption(filter.name, `${option.min}-${option.max}`)}
+                  >
+                    {option.min} - {option.max}$
+                  </li>
+                ))
+              ) : filter.name === "propertySize" ? (
+                // Для фильтра площади отображаем диапазоны
+                ["0-50 sqm", "50-100 sqm", "100-150 sqm", "150+ sqm"].map(
+                  (option, i) => (
+                    <li
+                      key={i}
+                      onClick={() => selectOption(filter.name, option)}
+                    >
+                      {option}
+                    </li>
+                  )
+                )
+              ) : (
+                // Для остальных фильтров отображаем их опции
+                filterOptions(filter.options).map((option, i) => (
+                  <li
+                    key={i}
+                    onClick={() => selectOption(filter.name, option)}
+                  >
+                    {option}
+                  </li>
+                ))
+              )}
             </ul>
           )}
         </div>
@@ -120,5 +134,6 @@ const FiltersForProperties = ({ onFiltersChange }) => {
     </div>
   );
 };
+
 
 export default FiltersForProperties;
