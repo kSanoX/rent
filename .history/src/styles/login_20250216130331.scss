@@ -1,0 +1,13 @@
+@import "../vars";
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

@@ -1,0 +1,80 @@
+@import "../vars";
+
+/* register.scss */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  .registerwrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .register-container {
+    background-color: $grayShades15;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: $grayShades60;
+      }
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    label {
+        text-align: left;
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #333;
+      }
+      
+      input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      button {
+        @include purpleButton;
+      }
+      
+      p {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      
+      p a {
+        color: #007bff;
+        text-decoration: none;
+      }
+  }
+
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
