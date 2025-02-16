@@ -115,12 +115,12 @@ function PropertyDetailsPage() {
           <div className='slider'>
             <div style={{ position: "relative", width: "90%", textAlign: "center" }}>
 
-              {/* image */}
+              {/* Картинка */}
               <img className='slider__img' src={`http://localhost:5000/${images[currentIndex]}`} alt={`Apartment Slide ${currentIndex + 1}`} draggable={false} />
 
             </div>
 
-            {/* indicate */}
+            {/* Индикатор */}
             <div style={{ marginTop: "10px", display: "flex", gap: "8px" }}>
               <button className='slider__left-btn' onClick={handlePrev}> &lt;</button>
               {images.map((_, index) => (

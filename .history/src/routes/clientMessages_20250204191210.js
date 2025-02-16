@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ClientMessage = require("../models/ClientMessage");
+const ClientMessage = require("../models/ClientMessage"); // Ваш Mongoose-модель
 
 router.post("/submit", async (req, res) => {
   try {

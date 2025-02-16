@@ -29,6 +29,7 @@ function ClientMessageForm () {
         const response = await fetch("http://localhost:5000/api/filters");
         const data = await response.json();
 
+        // Ищем данные с ключами 'Locations' и 'Property Type'
         const locationsData = data.find(item => item.name === "Locations");
         const propertyTypesData = data.find(item => item.name === "Property Type");
 

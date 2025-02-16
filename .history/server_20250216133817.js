@@ -69,7 +69,7 @@ app.delete('/api/my-cards/:id', async (req, res) => {
 
       res.json({ success: true, message: 'Card deleted successfully' });
   } catch (err) {
-      console.error("Error deleting card:", err);
+      console.error("Ошибка при удалении карточки:", err);
       res.status(500).json({ success: false, error: 'Failed to delete card' });
   }
 });

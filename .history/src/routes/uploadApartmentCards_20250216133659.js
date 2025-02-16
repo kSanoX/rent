@@ -55,8 +55,8 @@ router.post("/", authMiddleware, verifyRole(["admin", "seller"]), upload.fields(
     await newApartment.save();
     res.json({ success: true, apartment: newApartment });
   } catch (error) {
-    console.error("Error adding apartment:", error);
-    res.status(500).json({ success: false, error: "err server" });
+    console.error("Ошибка добавления квартиры:", error);
+    res.status(500).json({ success: false, error: "Ошибка сервера" });
   }
 });
 

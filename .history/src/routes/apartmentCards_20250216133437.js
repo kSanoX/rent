@@ -1,29 +1,29 @@
 const express = require('express');
 const ApartmentCard = require('../models/ApartmentCard');
-const User = require('../models/User');
+const User = require('../models/User'); // Добавил импорт User
 const router = express.Router();
 const { authMiddleware } = require("../middleware/authMiddleware");
 
 router.get('/cards', async (req, res) => {
-    console.log("Request in '/cards' recieved.");
+    console.log("Запрос на '/cards' получен.");
     try {
         const apartmentCards = await ApartmentCard.find();
         res.json(apartmentCards);
     } catch (err) {
         console.error(err);
-        res.status(500).send('err server');
+        res.status(500).send('Ошибка сервера');
     }
 });
 
 router.get('/my-cards', authMiddleware, async (req, res) => {
-    console.log("Request in '/my-cards' recieved.");
+    console.log("Запрос на '/my-cards' получен.");
 
     try {
         const userId = req.user.id;
-        console.log("Auth user:", userId);
+        console.log("Авторизованный пользователь:", userId);
 
         const userCards = await ApartmentCard.find({ userId: userId });
-        console.log("Count cards found:", userCards.length);
+        console.log("Найдено карточек пользователя:", userCards.length);
 
         if (!userCards.length) {
             return res.status(404).json({ success: false, error: "You don't have any cards at the moment." });
@@ -31,13 +31,13 @@ router.get('/my-cards', authMiddleware, async (req, res) => {
 
         res.json({ success: true, cards: userCards });
     } catch (error) {
-        console.error("error:", error);
+        console.error("Ошибка при получении карточек:", error);
         res.status(500).json({ success: false, error: "Ошибка сервера" });
     }
 });
 
 router.get('/user-cards/:id', async (req, res) => {
-    console.log("request in '/user-cards' recieved.");
+    console.log("request in '/user-cards' sended.");
 
     try {
         const userId = req.params.id;
