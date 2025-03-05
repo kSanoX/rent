@@ -4,6 +4,7 @@ import ApartmentsCards from '../ApartmentsCards/ApartmentsCards';
 import './propertiesPage.scss';
 import FiltersForProperties from "./FiltersForProperties/FiltersForProperties";
 import ClientMessageForm from './ClientMessageForm/ClientMessageForm';
+import Footer from "../HomePage/Footer/Footer"
 
 function PropertiesPage () {
   const [filters, setFilters] = useState({});
@@ -34,6 +35,7 @@ function PropertiesPage () {
         <FeaturedTitle showButton={false} title="Let's Make it Happen" text="Ready to take the first step toward your dream property? Fill out the form below, and our real estate wizards will work their magic to find your perfect match. Don't wait; let's embark on this exciting journey together"></FeaturedTitle>
       <ClientMessageForm></ClientMessageForm>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
