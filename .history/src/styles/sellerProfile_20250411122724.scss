@@ -1,0 +1,36 @@
+@import "../vars";
+
+.seller-profile {
+    display: flex;
+    margin: 80px;
+    flex-direction: column;
+    border: 2px solid $grayShades15;
+    border-radius: 16px;
+    padding: 32px;
+    gap: 32px;
+    text-align: center;
+
+}
+
+.profile-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    p {
+        
+    }
+}
+
+.profile-header {
+    border-right: 2px solid $grayShades15;
+    padding-right: 32px;
+}
+
+.profile-details {
+    border-right: 2px solid $grayShades15;
+    padding-right: 32px;
+    p {
+
+    }
+}

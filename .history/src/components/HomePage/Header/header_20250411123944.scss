@@ -1,0 +1,81 @@
+@import "../../../_vars.scss";
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, $grayShades10, $grayShades15);
+    padding: 22px 160px;
+    z-index: 1000;
+    position: relative;
+    min-width: 100%;
+
+    ul {
+        display: flex;
+        li {
+            background-color: transparent;
+        }
+
+    }
+}
+
+.logo__link-to-home {
+    background: none;
+    border: none;
+}
+
+li  {
+    @include blackButton;
+    text-decoration: none;
+  
+    &:hover { 
+      @include blackButtonWithBorders;
+    }
+  }
+  
+
+.contact__us-btn {
+    @include blackButtonWithBorders;
+    border: 0.1rem solid $grayShades15;
+}
+
+.nav__user { 
+    button {
+    @include purpleButton;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+}
+
+.nav__user {
+    display: flex;
+    align-items: center;
+    color: aquamarine;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 390px) {
+    header {
+    }
+
+    .contact__us-btn {
+        display: none;
+    }
+    .header__nav {
+        gap: 2px;
+
+        li {
+            padding: 8px;
+        }
+    }
+}
+
+
+
+  

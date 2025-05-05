@@ -1,0 +1,112 @@
+@import "../../../vars";
+
+.happen__fieldset {
+    display: flex;
+    flex-direction: column;
+    label {
+        margin-bottom: 8px;
+    }
+    input {
+        padding: 20px;
+        background-color: $grayShades15;
+        border: 2px solid $grayShades20;
+        border-radius: 12px;
+        color: white;
+    }
+}
+
+.happen__fieldset option::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: solid #333;
+    border-width: 0 2px 2px 0;
+    padding: 3px;
+    display: inline-block;
+    rotate: 45deg;
+    pointer-events: none;
+  }
+
+  .happen__select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: $grayShades15;
+    background-image: none;
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid $grayShades20;
+    color: $grayShades50;
+  }
+
+  .featured__title {
+    margin-bottom: 82px;
+  }
+
+.client__message {
+        display: grid;
+        grid-template: auto / repeat(4, 1fr);
+        gap: 3rem;
+        padding: 3rem;
+        border: 2px solid $grayShades15;
+        border-radius: 12px;
+}
+
+.text {
+    grid-column: 1 / -1; 
+}
+
+.budget {
+    grid-column: 1/ -1;
+}
+
+.happen__textarea {
+    background: $grayShades15;
+    padding: 1.6rem 2rem;
+    border-radius: 10px;
+    border: 2px solid $grayShades20;
+    color: white;
+    font-family: "Urbanist", sans-serif;
+    font-weight: 500;
+    resize: none;
+    margin-bottom: 1rem;
+}
+
+.sup-container__for-form {
+    display: flex;
+    grid-column: 1/ 1;
+}
+
+.privacy {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+
+    label {
+        @include defaultParagraph;
+        margin: 0;
+    }
+
+    .happen__checkbox {
+        border: 1px solid $grayShades10;
+        margin-right: 8px;
+    }
+}
+
+.happen__submit-btn {
+    @include purpleButton;
+}
+
+.happen__fieldset.privacy {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    padding-right: 500px;
+}
+
+
